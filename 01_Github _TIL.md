@@ -64,6 +64,8 @@
 
   ```shell
   $ git log 
+  $ git log --oneline   // 한 줄로 확인
+  $ git diff --staged   // 이전 버전과 다름을 보여줌 
   ```
 
 - `git`설정 (user.name & user.email) : **최초 1회 설정**
@@ -73,7 +75,14 @@
   $ git config --global user.email "0516khj2004@naver.com"
   ```
 
+- 과거 버전으로 돌아가기 
 
+  ```shell
+  $ git checkout  // 과거 버전 
+  $ git checkout master  // 현재 버전으로 
+  ```
+
+  
 
 ##  3. README.md
 
