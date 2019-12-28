@@ -1,8 +1,8 @@
 ## 클라우드 - 컴퓨팅 
 
 >**laas ** : 자동화, 자유성, 확장성이 좋음 
-**paas** : platform - heroku 
-**saas **: cloud 환경에서 동작 (메일,git ,,)
+ **paas** : platform - heroku 
+ **saas **: cloud 환경에서 동작 (메일,git ,,)
 
 설치프로그램
 
