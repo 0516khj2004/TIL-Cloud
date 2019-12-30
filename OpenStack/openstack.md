@@ -21,7 +21,8 @@
 
 - 오픈 스택 구성도 
 
-  ![image-20191230113137538](C:\Users\HPE\AppData\Roaming\Typora\typora-user-images\image-20191230113137538.png)
+![캡처](https://user-images.githubusercontent.com/35915879/71605290-0f0af600-2bab-11ea-8048-c44503c6083c.PNG)
+
   
 - storage 유형 
 
