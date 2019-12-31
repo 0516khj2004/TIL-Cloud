@@ -37,7 +37,8 @@
 
 - OpenStack Conceptual Diagram
 
- ![image-20191230113840433](C:\Users\HPE\AppData\Roaming\Typora\typora-user-images\image-20191230113840433.png)
+![캡처](https://user-images.githubusercontent.com/35915879/71605383-d1f33380-2bab-11ea-9513-4f106280d4cf.PNG)
+
 
 - 오픈스택 서비스 종류 
 
@@ -122,7 +123,8 @@
 > - three node -- controller node + copute node + network node (네트워크 오버헤드가 크기때문에)
 > - four node -- controller node + copute node + network node + storage node 
 
-![image-20191230141711287](C:\Users\HPE\AppData\Roaming\Typora\typora-user-images\image-20191230141711287.png)
+![캡처1](https://user-images.githubusercontent.com/35915879/71605394-e800f400-2bab-11ea-983d-4e2d70a322f7.PNG)
+
 
 - all-in-node
 
