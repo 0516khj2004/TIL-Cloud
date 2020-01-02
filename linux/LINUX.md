@@ -46,6 +46,7 @@ $ ls           // 목록 확인
 $ cd           // 디렉터리 이동 
 $ cp           // 파일 카피
 $ vi           // vi 편집키로 파일 열기 
+$ cat 			
 $ systemctl restart network    // centos 네트워크 재시작
 $ systemctl restart networking // ubuntu 네트워크 재시작
 $ su -student // 사용자(student) 변경

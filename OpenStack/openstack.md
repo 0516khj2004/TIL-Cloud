@@ -240,7 +240,9 @@
 
     cat keystonerc_admin -> export(로컬변수를 글로벌 변수로 바꿈 )  //username, pw , 주소 확인가능 
 
-## 6. 사용자 관점에서 openstack dashbord 서비스 이용
+## 6. 사용자 관점에서 openstack dashbord 서비스 이용 
+
+> all -in -node
 
 ### dashbord 메뉴얼
 
