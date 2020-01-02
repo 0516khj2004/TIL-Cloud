@@ -95,7 +95,7 @@
 
   > ensible , salt ,chef, puppet ..등 도구를 의해서 자동으로 설치 	
   >  scale up : 박스내에서 cpu 상승시킴
-  >  scale out  : 박스 밖에서 박스 단위로   [정리문서](https://m.blog.naver.com/islove8587/220548900044)
+  >  scale out  : 박스 밖에서 박스 단위로  (인스턴스 스냅샷) [정리문서](https://m.blog.naver.com/islove8587/220548900044)
   - RedhatSolutions
     - ***Packstack***     // puppet (devstack 보다 빠르다) 
     - Foreman / OpenstackPlatform Director     //그래픽 
@@ -398,7 +398,14 @@
       $ ip netns exec qdhcp-9b3ff3ab-716e-48e2-a23e-0dcdc8686311 ssh -i user1-key1.pem cirros@10.0.0.213
          ```
       
-      
+      - snapshot 생성 - 백업 (원본이 문제가 있거나, 복제를 하기 위해서 백업을 함 )
+        - 볼륨(vdb cinder 백업 ) - 스냅샷 생성 -> 복구 (스냅샷 생성 )
+        - 인스턴스(vda rootdisk - nova 벡업) - 스냅샷 생성 (이미지만듬)- 인스턴스 생성 가능 
 
-- 12. object storage 사용
+- 12. object storage 사용(Swift)
 
+      - 오프젝트 스토리지 - 컨테이너 생성 (c1)  -공용x  
+
+        폴더 생성 (KOO>download ) -> 업로드 (cirros)
+
+      - 컨테이너 생성(c2) - 공용 
