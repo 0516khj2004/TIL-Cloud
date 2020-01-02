@@ -386,9 +386,19 @@
 
       - 볼륨 생성 (vol1)  - > 볼륨 연결 관리 -> 인스턴스에 연결     //블록 기반 스토리지 
 
-        `$ lsblk` 확인 -> vdb 붙어 있는지 확인 가능 
+        `$ lsblk` 확인 -> vdb 붙어 있는지 확인 가능
 
-         
+      - key 기반 instance에 접속 (controller 에서)
+      
+         ```shell
+      $ cd /mnt/hgfs/share_linux
+      $ cp user1-key1.pem /root
+      $ chmod 600 /root/user1-key1.pem
+      $ cd /root
+      $ ip netns exec qdhcp-9b3ff3ab-716e-48e2-a23e-0dcdc8686311 ssh -i user1-key1.pem cirros@10.0.0.213
+         ```
+      
+      
 
 - 12. object storage 사용
 
