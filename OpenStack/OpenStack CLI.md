@@ -364,6 +364,7 @@
   $ grep NEUTRON openstack.txt
   $ ip netns // 라우터 리스트 출력 
   $ ip netns exec 라우터id ip a //
+  ```
 ```
   
 - 설치 [참고](https://docs.openstack.org/neutron/rocky/install/)
@@ -387,7 +388,7 @@
   
   controller 에서 
   $ openstack network agent list //확인 (compute - Linux bridge agent)
-  ```
+```
 
 ## 7. CLI로 Instance 시작 -controller 
 
@@ -481,3 +482,11 @@ $ cd /var/tmp
 $ swift download demo-c1   // 다운로드
 ```
 
+## 10. aws - CloudFormation (heat 와 비슷)
+
+> 자동화를 위해 코드로 작성하는 것 - openstack 에서 heat와 비슷하다 
+
+- stack
+- 리소스 타입
+- 템플릿 버전 
+- 템플릿 생성기 
