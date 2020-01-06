@@ -15,11 +15,11 @@
 - 에드포인트 : 서비스로 접근하려고 하는 , 보통  url 
 - 역활 : 사용자가 특별한 작업을 수행할 수 있도록 책임을 맡은 고유한 성격
 
-```
-# source keystonerc_admin     // . keystonerc_admin
-# openstack user list        //cLI 명령을 가지고 작업 가능 
-# openstack role list --user stack1 --project pro1  // 부여받은 role 확인 가능 
-```
+    ```
+    # source keystonerc_admin     // . keystonerc_admin
+    # openstack user list        //cLI 명령을 가지고 작업 가능 
+    # openstack role list --user stack1 --project pro1  // 부여받은 role 확인 가능 
+    ```
 
 - CLI로 프로젝트/ 사용자 / 역활 
 
@@ -312,3 +312,172 @@
   ```
   
   
+
+## 6. Neutron  - network service 
+
+> 네트워크 방화벽 서비스 , 로드밸런스 서비스 , 
+>
+> 클라우드 사용자마다 내부 네트워크 생성가능 , 라우터 (외부 네트워크랑 연결하기 위한), 서브넷 -> 객체의 추상화 
+>
+> - open vSwitch plug-in - neutron이 지원하는 프로그인 종류(현재 쓰고 있는 플러그인) 
+>
+> ​        들어올떄 (DNAT, Dip-> 사설 ip) -----나갈때 (SNATm Sip -->공인 ip) 
+	>
+    > ```shell
+    > $ip netns exec qrouter-a1b0c327-247a-4bb3-912d-08e3e9947408 iptebles -t nat -L 
+    > //SNAt , DNAT 정보를 확인 
+    > ```
+>
+> - 분리 구조 (ML2은 compute 노드마다 다르게 사용 할 수 있다)
+>  - 컨트롤러 노드 - server, plugin agent, L2-openswitch
+>   - 네트워크 노드 -  plugin, L3, DHCP, Layer 2 agent(라우터 역활)
+>   - 컴퓨트 노드 - plugin , L2-리눅스 브릿지-agent   -- 요즘은 물러적인 네트워크가 아닌 외부에서 바로 노드에 접속하는 것을 선호
+
+- ML2
+
+  - Local - host only bridge (동일한 컴퓨트 호스트 안에 같은 네트워크 통신만 가능)
+
+  - Flat - 별도의 플렛 망 구성시 별도의 물리적인 인터페이스간의 연결, 네트워크 주소가 다른경우에는 라우터를 통해서 연결이 가능하다
+
+  - VLAN - 같은 vlanid라는 것을 적용해서 트래픽 분리 , 물리적인 스위치와도 연결이 가능 mac(2계층)주소 가짐 
+
+  - GRE/VxLAV - VLAN의 확장 버전 클라우드에 적합함 -id 개수 4000개 이상 필요할 경우 
+
+    ```shell
+    $ ovs-vsctl show // 가상의 네트워크 출력 
+    ```
+
+  - 메커니즘 드라이버 
+
+- 인스턴스에 대한 연결을 제공한느 네트워트 종류
+
+  - provider networks - 관리자가 생성
+  - self-service networks  - 사용자가 생성 
+
+- 확인
+
+  ```shell
+  $ . keystonerc_admin  
+  $ neutron agent-list // 설치된 agent 리스트 출력 
+  $ openstack-service status neutron  // neutron 상태 출력 (openstack-status 모든 패키지 출력)
+  $ neutron ext-list // 확장자 리스트 확인
+  $ grep NEUTRON openstack.txt
+  $ ip netns // 라우터 리스트 출력 
+  $ ip netns exec 라우터id ip a //
+```
+  
+- 설치 [참고](https://docs.openstack.org/neutron/rocky/install/)
+
+  ```shell
+  $ yum install openstack-neutron-linuxbridge ebtables ipset
+  $ cp /etc/neutron/neutron.conf /etc/neutron/neutron.conf.old
+  $ scp controller:/etc/neutron/neutron.conf /etc/neutron/neutron.conf
+  $ chgrp neutron /etc/neutron/neutron.conf
+  
+  **Networking Option 2: Self-service networks**
+  
+  $ vi /etc/neutron/plugins/ml2/linuxbridge_agent.ini
+  $ lsmod|grep br_netfilter
+  $ modprobe br_netfilter
+  $ sysctl -a |grep bridge-nf
+  net.bridge.bridge-nf-call-ip6tables = 1
+  net.bridge.bridge-nf-call-iptables = 1  //확인 
+  $ systemctl enable neutron-linuxbridge-agent.service
+  $ systemctl start neutron-linuxbridge-agent.service
+  
+  controller 에서 
+  $ openstack network agent list //확인 (compute - Linux bridge agent)
+  ```
+
+## 7. CLI로 Instance 시작 -controller 
+
+- 가상 네트워크 인프라 구축 [참고](https://docs.openstack.org/install-guide/launch-instance-networks-selfservice.html)
+
+  ```shell
+  $ . keystonerc_demo
+  $ openstack network create selfservice
+  $ openstack subnet create --network selfservice   --dns-nameserver 8.8.4.4 --gateway 172.16.1.1   --subnet-range 172.16.1.0/24 selfservice
+  $ openstack router create router
+  $ openstack router add subnet router selfservice
+  $ openstack router set router --external-gateway ext1
+  $ . keystonerc_admin 
+  $ openstack port list --router route
+  ```
+
+- 리소스 구축 [참고](https://docs.openstack.org/install-guide/launch-instance.html)
+
+  ```shell
+  $ openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
+  $ openstack flavor list
+  $ . keystonerc_demo 
+  $ ls .ssh
+  $ openstack keypair create --public-key ~/.ssh/id_rsa.pub mykey
+  $ openstack keypair list
+  $ openstack security group rule create --proto icmp default
+  $ openstack security group rule create --proto tcp --dst-port 22 default
+  $ openstack image list
+  $ openstack image create "cirros-0.3.5" --container-format bare --disk-format qcow2 --file ./cirros-0.3.5-x86_64-disk.img 
+  $ openstack image list
+  ```
+
+- 인스턴스  생성 [참조](https://docs.openstack.org/install-guide/launch-instance-selfservice.html)
+
+  ```shell
+  $ . demo-openrc
+  $ openstack network list 
+  $  openstack server create --flavor m1.nano --image cirros-0.3,5 \
+    --nic net-id=59f7d72b-0042-418f-8e38-56f04aaaa9ed --security-group default \
+    --key-name mykey selfservice-instance
+  $  openstack server list
+  $ openstack console url show selfservice-instance //콘솔 접속 url
+  $  virsh list --all
+  $  virsh console 1  //콘솔 1으로 접속 
+  
+  $ openstack floating ip create ext1
+  $ openstack server add floating ip selfservice-instance 10.0.0.217
+  $ ip netns exec qrouter-96c47acc-753f-4669-a93f-490b309abce4 ssh cirros@10.0.0.217
+  ```
+
+## 8. Block Storage (Cinder)
+
+> 기본 벡압 스토리지 는 LVM이다.  
+>
+> 가장 많이 사용하는 백업 스토리지 는  Ceph 스토리지이다. 
+>
+> - 스냅샷 백업 - LVM의 스냅샵 공간 사용 
+> - cinder 백업 - swift와 연동 		
+
+
+
+- 스토리지 
+  - block 스토리지 - cinder , EBS
+  - file 스토리지  - NFS, EFS
+  - object 기반 스토리지 - swift, S3
+  - db 기반 스토리지 - mysql, Trove  
+
+- iSCSI - 컴퓨팅 환경에서 데이터스토리지 시설을 이어주는 IP기반의 스토리지 네트워킹 표준이다.
+
+- cinder 만들기 
+
+  ```shell
+  $ cinder create --name demo-v1 1
+  $ cinder list 
+  $ lvs 
+  $ vgs
+  $ pvs 
+  $ nova volume-attach selfservice-instance a4a545cc-1ecf-4bc9-9d40-ab5124bd87ef auto
+  $ lsblk
+  ```
+
+​	
+
+## 9. object Storage(Swift) 
+
+```shell
+$ swift post demo-c1  //생성
+$ swift upload demo-c1 cirros-0.3.5-x86_64-disk.img // 업로드 
+$ swift list demo-c1 --lh  //확인
+$ cd /var/tmp 
+$ swift download demo-c1   // 다운로드
+```
+
