@@ -83,7 +83,7 @@ $ docker container prune  //모든 종료된 컨테이너  삭제
 $ docker system prune // 최종 삭제 
 $ docker stop id  & docker rm id // 파워쉘에서는 오류, 리눅스에서는 됨 
 $ docker image rm image_id // 이미지 삭제 = docker rmi id /-f 이미지 강제 삭제 
-
+$ docer stats 
 ```
 
 ## 2. docker  프로젝트 
@@ -104,8 +104,8 @@ $ docker image rm image_id // 이미지 삭제 = docker rmi id /-f 이미지 강
   ```dockerfile
   FROM node:alpine            //alpine-가장 작은 리눅스 
   COPY  ./package.json ./package.json // 윈도우에 있는 package 파일을 리눅스에 카피 
-  COPY ./index.js ./index.js 
   RUN npm install				//node가 설치된 이미지가 아닌 url로도 node를 설치할 수 있다.
+  COPY ./index.js ./index.js  
   CMD ["npm","start"]
   ```
 
@@ -135,17 +135,18 @@ $ docker image rm image_id // 이미지 삭제 = docker rmi id /-f 이미지 강
     $ docket exec -it 01f226d2755e hostname // 컨테이너 id = hostname, ip address = -i 
     
     # WORKDIR /home/node  // dockerfile 설정하지않으면 파일들이 root에 저장되니, home/node로 설정하면 파일들이 들어감
-    # vi index.js  // 파일 수정하고 exit나와서 docker restart id 
-    ```
-
-  - mysql 5.7
-
+    # vi index.js  // 파일 수정하고 exit나와서 
+    $ docker restart id 
+  ```
+  
+- mysql 5.7
+  
     ```
     $ docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql my
     sql:5.7 // 패스워드 없이 사용한다 
     $ docker exec -it mysql //bin//bash
     
     # mysql -u root -p
-    ```
-
+  ```
+  
     
