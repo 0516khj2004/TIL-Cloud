@@ -137,7 +137,7 @@ $ docer stats
     # WORKDIR /home/node  // dockerfile 설정하지않으면 파일들이 root에 저장되니, home/node로 설정하면 파일들이 들어감
     # vi index.js  // 파일 수정하고 exit나와서 
     $ docker restart id 
-  ```
+    ```
   
 - mysql 5.7
   
@@ -148,5 +148,64 @@ $ docer stats
     
     # mysql -u root -p
   ```
+
+  ## 3. docker-compose 
+
+> docker와는 별게  docker-compose version 
+>
+> yaml 파일로 만들어짐 
+>
+> 여러 컨테이너의 실행을 한번에 관리할 수 있게 해준다.(서비스를 여러가지 할 수 있는게 장점 )
+
+- docker-compose.yml
+
+  = docker run -d --name my-mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql:5.7
+
+  ```dockerfile
+  version: "3"
+  services: 
+      my-mysql:
+          image: mysql:5.7
+          ports: 
+              - "3306:3306"
+          environment: 
+              - MYSQL_ALLOW_EMPTY_PASSWORD=true
+       mysql-data:
+          build: .               //도커파일로 빌드
+  ```
+
+- CLI 
+
+  ```
+  $ docker-compose up  // 올린다
+  $ docker-compose up -d //백그라운드 
+  $ docker-compose down  // stop+rm까지 된다
+  ```
+
+## 4. 실습 - mongoDB 
+
+- Dockerfile 
+
+  ```
+  FROM mongo:latest 
+  CMD ["mongod", ,"--replSet","myapp"]
+  ```
+
+- CLI
+
+  ```
+  $ docker build -t 0516khj2004/mymongo:latest .
+  $ docker run -p 27017:27017 0516khj2004/mymongo:latest 
+  $ docker exec -it 7de505d9f124 mongo
+  ```
+
+- ip 확인 명령어 
+
+  ```
+  ipconfig 
+  ip addr show 
+  hostname -i
+  ```
+
   
-    
+
