@@ -82,7 +82,7 @@ $ docker rm $(docker ps -qa) // \모든 종료된 컨테이너 삭제
 $ docker container prune  //모든 종료된 컨테이너  삭제
 $ docker system prune // 최종 삭제 
 $ docker stop id  & docker rm id // 파워쉘에서는 오류, 리눅스에서는 됨 
-$ docker image rm image_id // 이미지 삭제 = docker rmi id /-f 이미지 강제 삭제 
+$ docker image rm image_id // 이미지 삭제 = docker rmi id /-f 이미지 강제 삭제(컨테이너가 삭제되는 것은 아님 )
 $ docer stats 
 ```
 
@@ -182,7 +182,7 @@ $ docer stats
   $ docker-compose down  // stop+rm까지 된다
   ```
 
-## 4. 실습 - mongoDB 
+## 4. 실습 - mongoDB (자동화 x)
 
 - Dockerfile 
 
@@ -195,17 +195,131 @@ $ docer stats
 
   ```
   $ docker build -t 0516khj2004/mymongo:latest .
-  $ docker run -p 27017:27017 0516khj2004/mymongo:latest 
-  $ docker exec -it 7de505d9f124 mongo
+  $ docker run -p 27017:27017 0516khj2004/mymongo:latest  (컨테이너 3개 만들기)
+  $ docker exec -it 7de505d9f124 mongo //bash로 접속하는 경우 mongo ip:post로 mongo접속 
+  
+  #apt-get update
+  #apt-get install -y iputils-ping 
+  #ping 다른 컨테이너 ip
   ```
 
 - ip 확인 명령어 
 
   ```
-  ipconfig 
-  ip addr show 
-  hostname -i
+  # ipconfig 
+  # ip addr show 
+  # hostname -i
+  $ docker inspect 컨테이너id    // 컨테이너의 상세 정보
+```
+  
+- mongo 
+
+  ```
+  # rs.initiate()     // 마스터가 되는 명령어 
+  # db.isMaster()
+  # rs.add(슬레이브 ip: 포트번호)
+  ```
+
+## 5. 실습 - MongoDB(자동화)
+
+- 파일 준비 
+
+  - Dockerfile 
+
+    ```dockerfile
+    FROM mongo:latest 
+    RUN mkdir /usr/src/configs       
+    WORKDIR /usr/src/configs          
+    COPY replicaSet.js .
+    CMD [ "mongo", "mongodb://mongo1:27017", "./replicaSet.js" ]
+    ```
+
+  - docker-compose.yml
+
+    ```dockerfile
+    version: "3"
+    services: 
+        mongo1:
+            image: "mongo"
+            ports: 
+                - "27017:27017"
+            volumes: 
+                - $HOME/mongoRep1/mongo1:/data/db
+            networks: 
+                - mongo-networks
+            command: mongod --replSet myapp
+        mongo2:
+            image: "mongo"
+            ports: 
+                - "27018:27017"
+            volumes: 
+                - $HOME/mongoRep1/mongo2:/data/db
+            networks: 
+                - mongo-networks
+            depends_on: 
+                - mongo1
+            command: mongod --replSet myapp
+        mongo3:
+            image: "mongo"
+            ports: 
+                - "27019:27017"
+            volumes: 
+                 - $HOME/mongoRep1/mongo3:/data/db
+            depends_on: 
+                - mongo2
+            networks: 
+                - mongo-networks
+            command: mongod --replSet myapp 
+    
+        mongodb_setup:
+            image: "mongo_repl_setup"
+            depends_on: 
+                - mongo3
+            networks: 
+                - mongo-networks    
+            
+    networks: 
+        mongo-networks:
+            driver: bridge         
+    ```
+
+  - replicaSet.js
+
+    ```javascript
+    config = {
+        _id: "myapp",
+        members: [
+            {_id:0, host: "mongo1:27017"},
+            {_id:1, host: "mongo2:27017"},
+            {_id:2, host: "mongo3:27017"},
+        ]
+    }
+    rs.initiate(config);    
+    rs.conf();
+    ```
+
+- CLI
+
+  ```
+  $ docker build -t mongo_repl_setup . 
+  $ docker-compose up
+  $ docker exec -it vd1_mongo1_1 mongo mongodb://mongo1:27017
+  ```
+
+- db
+
+  ```mariadb
+  is.Master();
+  rs.status();
+  show dbs;
+  use boolstore;
+  db.books.save({"title":"Docker"});
+  db.books.find();
   ```
 
   
+
+
+
+
 
