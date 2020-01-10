@@ -1,4 +1,4 @@
-# docker
+# docker- Swarm
 
 ## 1.  -network (docker network ls )
 
@@ -240,5 +240,42 @@ services:
   #docker stack deploy -c /stack/visualizer.yml visualizer
   ```
 
-  
+- HAProxy 
+
+  HAProxy 를 이 프록시 서버로 이용해 스윔 클러스터 외부에서 nginx서비스에 접근함 
+
+​       window port 8000 <-> Manager 80<-> HAProxy 80<-> nginx 8080
+
+ my-ingress.yml  - 추가SERVICE_POSTS: 80
+
+       ````
+version: "3"
+services: 
+    haproxy:
+        image: dockercloud/haproxy
+        ports:
+            - 80:80
+            - 1936:1936
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        deploy:
+            mode: global
+            placement:
+                constraints: [node.role == manager]
+        networks:
+            - ch03
+networks:
+    ch03:
+        external: true    
+        
+       ````
+
+```
+# docker stack deploy -c /stack/my-webapi.yml echo
+# docker stack deploy -c /stack/my-ingress.yml echo
+
+localghost: 8000
+```
+
+
 
