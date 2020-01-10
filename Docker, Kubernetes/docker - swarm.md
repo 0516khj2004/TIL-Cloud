@@ -133,10 +133,10 @@ services:
 
   ```
   $ docker exec -it manager sh
-  # dock swarm init // 매니저에서 swarm 설치 
+  # docker swarm init // 매니저에서 swarm 설치 
    docker swarm join --token SWMTKN-1-1fjoczo1ekg0fmu6mbf6vb0hifffjn61k32xec9avd7qhiuvjt-01gudp6w30nzopx6kxb6zbw6i 172.31.0.3:2377
   // worker 01,02,03 에 위에 내용 붙에서 node join하기 
-  
+  # docker node ls  // swarm 목록 확인 
   # docker swarm leave --force  // swarm join풀기 
   ```
 
@@ -152,3 +152,93 @@ services:
   
   #docker pull registry:5000/busybox:latest
   ```
+  
+- 서비스 - 애플리케이션 이미지를 하나만 다룸 
+
+  ```
+  $ docker tag gihyodocker/echo localhost:5000/example/echo
+  $ docker push localhost:5000/example/echo
+    http://localhost:5000/v2/_catalog  //확인 
+  $ docker exec -it manager sh
+  # docker pull localhost:5000/example/echo
+  # docker service create --replicas 1 --publish 80:8080 --name echo registry:5000/example/echo  
+    //window<-->manage<--> 8000:80 localhost:8000 확인가능 
+  
+  # docker service ls  //서비스 목록 
+  # docker service scale echo=3 //컨테이너를 3개 증가
+  # docker servicce ps echo // echo라는 서비스가 어떤 컨테이너로 구성되어있는지 확인하는 목록 
+  # docker service rm echo // 서비스 삭제 
+  ```
+
+- 스택 - 애플리케이션을 구성하는 일부 컨테이너를 제어하기 위한 단위  -서비스보다 큰 단위
+
+  **overlay 네트워크** - 스택을 사용해 배포된 서비스 그룹 
+
+   ```
+  # docker network create --driver=overay --attachable ch03
+  # docker network ls 
+   ```
+
+  stack 파일에 my-webapi.yml 파일 생성
+
+  ```
+  version: "3"
+  services:
+      api:
+          image: registry:5000/example/echo:latest
+          deploy:
+              replicas: 3
+              placement :
+                  constraints: [node.role != manager]
+          networks:
+              - ch03
+      nginx:
+          image: gihyodocker/nginx-proxy:latest
+          deploy:
+              replicas : 3
+              placement:
+                  constraints: [node.role != manager]
+          environment:
+              BACKEND_HOST: echo_api:8080
+          networks:
+              - ch03
+          depends_on:
+              - api
+  networks:
+      ch03:
+          external: true
+  ```
+
+  ```
+  # docker stack deploy -c /stack/my-webapi.yml  echo
+  # docker stack ls
+  # docker stack service echo
+  # docker service ps echo_api
+  # docker service ps echo_nginx
+  ```
+
+- visualizer 컨테이너 배치 시각화 
+
+  visualizer.yml
+
+  ```
+  version: "3"
+  services: 
+      app:
+          image: dockersamples/visualizer
+          ports:
+              - "9000:8080"
+          volumes:
+              - /var/run/docker.sock:/var/run/docker.sock
+          deploy:
+              mode: global
+              placement:
+                  constraints: [node.role == manager]
+  ```
+
+  ```
+  #docker stack deploy -c /stack/visualizer.yml visualizer
+  ```
+
+  
+
