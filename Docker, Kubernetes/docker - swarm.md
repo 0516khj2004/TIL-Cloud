@@ -248,28 +248,24 @@ services:
 
  my-ingress.yml  - 추가SERVICE_POSTS: 80
 
-       ````
-version: "3"
-services: 
-    haproxy:
-        image: dockercloud/haproxy
-        ports:
-            - 80:80
-            - 1936:1936
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-        deploy:
-            mode: global
-            placement:
-                constraints: [node.role == manager]
-        networks:
-            - ch03
-networks:
-    ch03:
-        external: true    
-        
-       ````
-
+    version: "3"
+    services: 
+        haproxy:
+            image: dockercloud/haproxy
+            ports:
+                - 80:80
+                - 1936:1936
+            volumes:
+                - /var/run/docker.sock:/var/run/docker.sock
+            deploy:
+                mode: global
+                placement:
+                    constraints: [node.role == manager]
+            networks:
+                - ch03
+    networks:
+        ch03:
+            external: true 
 ```
 # docker stack deploy -c /stack/my-webapi.yml echo
 # docker stack deploy -c /stack/my-ingress.yml echo

@@ -210,15 +210,15 @@ $ docer stats
   # ip addr show 
   # hostname -i
   $ docker inspect 컨테이너id    // 컨테이너의 상세 정보
-```
-  
+  ```
+
 - mongo 
 
-  ```
+```
   # rs.initiate()     // 마스터가 되는 명령어 
   # db.isMaster()
   # rs.add(슬레이브 ip: 포트번호)
-  ```
+```
 
 ## 5. 실습 - MongoDB(자동화)
 
@@ -233,6 +233,7 @@ $ docer stats
     COPY replicaSet.js .
     CMD [ "mongo", "mongodb://mongo1:27017", "./replicaSet.js" ]
     ```
+
 
   - docker-compose.yml
 
@@ -283,8 +284,9 @@ $ docer stats
             driver: bridge         
     ```
 
-  - replicaSet.js
 
+  - replicaSet.js
+  
     ```javascript
     config = {
         _id: "myapp",
@@ -297,6 +299,7 @@ $ docer stats
     rs.initiate(config);    
     rs.conf();
     ```
+
 
 - CLI
 
