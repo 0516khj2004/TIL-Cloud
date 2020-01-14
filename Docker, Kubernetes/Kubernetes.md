@@ -43,6 +43,14 @@
 
 - pod 올리기 
 
+  > 컨테이너가 모인 집합체의 단위. 하나 이상의 컨테이너로 구성
+  >
+  > 고정 ip보다는 lable등을 사용한다
+  >
+  > 중복되지 않는 post 제공 
+  >
+  > 외부와 연결할려면 service가 필요하다 
+
   - `kubectl apply -f  *.yml`
 
   - 데시보드에서 `+create`
@@ -62,11 +70,17 @@
         - containerPort: 8000
     ```
 
+  - 데시보드 > pod >exec   == `kubectl exec -it podid sh`
+
   - pod 리스트 확인 `kubectl get pods` 
 
   - 사용 할 수 있는 서비스 목록 확인 `kubectl get all` 
 
 - service 올리기 
+
+  > externalIPs: 외부랑 연결
+  >
+  > clustip : 내부랑 연결 
 
   ```
   apiVersion: v1
