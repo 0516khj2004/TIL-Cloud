@@ -1,0 +1,30 @@
+# create your drupal and mysql config here
+version: "3"
+services: 
+    mydrupal:
+        image: drupal:latest
+        ports: 
+            -   "8080:80"
+        environment: 
+            DRUPAL_DATABASE_HOST: drupal-mysql
+            DRUPAL_DATABASE_PORT: 3306
+            DRUPAL_DATABASE_NAME: drupal
+            DRUPAL_DATABASE_USERNAME: drupal
+            DRUPAL_DATABASE_PASSWORD: drupal
+        volumes:
+            - "./drupal-data:/var/lib/postgresql/data"
+        depends_on:
+            - mymysql
+        restart: always
+
+    mymysql:
+        image: mysql:5.7
+        container_name: drupal-mysql
+        environment:     
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+            MYSQL_DATABASE: drupal
+            MYSQL_USER: drupal
+            MYSQL_PASSWORD: drupal
+        ports: 
+            - "3306:3306"
+
