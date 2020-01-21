@@ -113,7 +113,7 @@
   
   # docker service ps todo_app_api //어떤 노드에 서비스가 설치되었는 확인하는 명령어
   # docker ps = docker container ls //실행 중인 cotainer 리스트 출력 
-  # docker stack setvice todo_app 
+  # docker stack service todo_app 
   ```
 
 - todo_app_api.1 or todo_app_api.2
