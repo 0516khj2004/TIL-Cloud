@@ -133,5 +133,102 @@
      console.log(a === b)     //false
     ```
 
-    
+- 숫자와 문자열 자료형 변환 casting-> 형변환
 
+  - Number()
+
+    - NaN(Not a Number)
+
+    ```javascript
+     let userdata = prompt("숫자를 입력하세요");
+     let cov = Number(userdata);
+     let result = cov +10; 
+    
+     console.log("restult=" + resu11lt);
+    ```
+
+  - String()
+
+
+
+### 3. 조건문
+
+- if elseif
+
+  ```html
+  <script>
+          let useko = Number(prompt("국어 점수"));
+          let useen = Number(prompt("영어 점수"));
+          let usema = Number(prompt("수학 점수"));
+  
+          let avg = (useko + useen +usema)/3;
+  
+          if(avg >=90){
+             grade = "수" ;
+          }else if(avg >=80){
+              grade = "우"
+          }else if(avg >=70){
+              grade = "미"
+          }
+          else if(avg >=60){
+              grade = "양"
+          }else{
+              grade = "가"
+          }
+          alert("당신의 점수는 " + grade  + "입니다");
+          console.log(avg);
+  </script>
+  ```
+
+- switch
+
+  ```javascript
+   switch(avg){
+       case 90: console.log("A"); break;
+       case 80: console.log("B"); break;
+       case 70: console.log("C"); break;
+       case 60: console.log("D"); break;
+       default: console.log("F"); break;
+   }	
+  ```
+
+- 삼항 연산자
+
+  (number > 0) ? alert('자연수입니다'): alert('자연수가 아니다');
+
+- 짧은 조건문
+
+  - and  ->&&
+  - or ->||
+
+- test 
+
+  - indexOf() 
+
+
+
+### 4.반복문
+
+- 배열 
+
+  ```html
+  <script>
+      let array = [ 273,32, 103,57,52];
+  
+      console.log(array);         // [ 273,32, 103,57,52];
+      console.log(typeof array);  //object(객체타입)
+      console.log(array.length);  //5
+      console.log(array[0]);      //273
+      array[1] = 100;
+      console.log(array[1]);	    //100
+      
+      for(let i=0; i<5; i++){
+      console.log(array[i]);}    // 273 100 103 57 52
+  </script>
+  ```
+
+- for
+
+- do
+
+- while
