@@ -133,7 +133,7 @@
      console.log(a === b)     //false
     ```
 
-- 숫자와 문자열 자료형 변환 casting-> 형변환
+- 숫자와 문자열 자료형 변환 **casting-> 형변환**
 
   - Number()
 
@@ -227,8 +227,30 @@
   </script>
   ```
 
-- for
+- for(초기식; 조건식; 종결식 ) /횟수제한 
 
-- do
+  ```javascript
+  let value =0;
+  let startTime = new Date().getTime();
+  for(var CPS =0; new Date().getTime() < startTime+1000; CPS++){}
+  alert("초당 연산 횟수" + CPS);
+  ```
 
-- while
+- for in 
+
+- do--while
+
+- while 
+
+  - while (true)  --> 무한 루트 
+  - break; or false 
+  - new --> 새로운 객체 Date() --> 생성자
+
+  ```javascript
+  let value =0;
+  let startTime = new Date().getTime();
+  while(new Date().getTime() < startTime+1000){ value++;}
+  alert(value);
+  ```
+
+- continue
