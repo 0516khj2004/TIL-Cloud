@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        let useko = Number(prompt("국어 점수"));
+        let useen = Number(prompt("영어 점수"));
+        let usema = Number(prompt("수학 점수"));
+
+        let avg = (useko + useen +usema)/3;
+
+        if(avg >=90){
+           grade = "수" ;
+        }else if(avg >=80){
+            grade = "우"
+        }else if(avg >=70){
+            grade = "미"
+        }
+        else if(avg >=60){
+            grade = "양"
+        }else{
+            grade = "가"
+        }
+        alert("당신의 점수는 " + grade  + "입니다");
+        console.log(avg);
+
+        switch(avg){
+            case 90: console.log("A"); break;
+            case 80: console.log("B"); break;
+            case 70: console.log("C"); break;
+            case 60: console.log("D"); break;
+            default: console.log("F"); break;
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

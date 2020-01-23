@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--자바 스크립트 예제-->
+    <script>
+        var name = "koo";
+        console.log("hello \'" + name +"\'");
+        console.log("Hello \"world\"");
+        //alert(10/7);
+        //alert('가방' > '하마');
+
+        var a = 10;
+        var b = "10";
+        console.log(a == b);
+        console.log(a === b);
+
+        //alert() 경고창, confirm() 확인창(버튼 2개), prompt() 입력창 
+        const userValue = prompt("값을 입력하세요!");
+        console.log("당신이 입력한 값은 " + userValue);
+        //짝수인지 홀수 인지 판단하기 
+        if(userValue % 2 ==0){
+            console.log("짝수입니다")
+        }else{
+            console.log("홀수입니다.")
+        }
+        //userValue = "TEST1"
+        console.log("당신이 입력한 값은 " + userValue);
+        // userValue = "TEST2"
+        console.log("당신이 입력한 값은 " + userValue);
+
+        window.onload = function(){
+            let list ='';
+            list += '<ul>\n';
+            list += '   <li>Hello</li>\n';
+            list +='    <li>JavaScript</li>\n';
+            list +='</ul>';
+            
+            let a = 10;
+            console.log(a);
+            console.log(a++);
+            console.log(++a);
+            console.log(a);
+
+            console.log(typeof(a));
+
+            let b = "10"
+            console.log(typeof(b));
+            console.log(list)
+            document.body.innerHTML = list;
+        };   
+    </script>
+</head>
+<body>
+    <h1>제목입니다</h1>
+    <!--<h1>은 제목입니다.-->
+</body>
+</html>
