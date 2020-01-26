@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="regist.html" method="Post">
+        이름: <input type="text" placeholder="이름을 입력하세요" name="name"><br><br>
+        아이디:  <input type="text" placeholder="아이디를 입력하세요" name="id"><br><br>
+        비밀번호: <input type="password" placeholder="pw을 입력하세요" name="pw"><br><br>
+        남성:<input type="radio" name="gender">
+        여성:<input type="radio" name="gender">
+        <p>
+        사용하는 sns: 
+        <input type="checkbox" name="sns"> facebook
+        <input type="checkbox" name="sns"> twitter
+        <input type="checkbox" name="sns"> google
+        <input type="checkbox" name="sns"> instagram
+        </p>
+        연령:
+        <select name="age">
+            <option value="10">10대</option>
+            <option value="20">20대</option>
+            <option value="30">30대</option>
+        </select><br>
+        사진: <input type="file" name="fiel"><br><br>
+        자기소개 : 
+        <textarea cols="50" rows="10" name="pp"></textarea><br><br>
+        <input type="submit" value="회원가입">
+        <input type="button" value="임시저장">
+        <input type="reset" value="초기화">
+    </form>
+</body>
+</html>

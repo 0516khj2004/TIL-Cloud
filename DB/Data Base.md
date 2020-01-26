@@ -110,3 +110,59 @@ $ mysql -u root -p       //mysql에 접속
 # drop user kootest  // 계정 삭제
 ```
 
+- table 생성  - create 
+
+  ```
+  UNIQUE -- null가능하지만 두번째부터는 안된다.. 유일한 값 
+  $ arter table  - 테이블 수정 
+  $ drop table - 테이블 전체가 삭제 
+  $ traucate table  - 구조는 남아있고 , 데이터만 삭제(완전 초기화_
+  
+  dml
+  insert into
+  update ____ set_____where _____
+  delete from 테이블이름 where _______ - 22
+  ```
+
+  
+
+## 4. JOIN
+
+- 조인 테이블 만들기 2방법
+  - 1) select * from  (중복되서 좋지 않은 방법이다 10*20)
+  - 2) select * from  where 
+  - 3) select* from ___
+- 명시 방법 (3가지)
+  - 1),
+  - 2) JOIN - inner
+        from 테이블 1 inner join 테이블 2 on 조인조건 
+        where 검색조건
+  - 3) LEFT JOIN ----outer  왼쪽에 데이터가 있지만 오른쪽에 데이터가 없더라도 출력이 가능하다
+  - 4) self join 
+       select a.employee_id , concat(a.first_name, ' ', a.last_name) as name,
+       concat(b.first_name, ' ',b.last_name) as '매니저 이름 '
+       from employees a left outer  join  employees b
+       on a.manager_id =b.employee_id ; 
+  - 5)서브 질의 (쿼리에다가 하나의 쿼리가 또 다시 들어가는것)
+    where price =(select max(price ) from book  
+    범위를 지정할 수 있음
+    where cusrid in ( slect custid from orders)  -----중복값 제외 
+    - 예시 ) 
+      select c.name, b.ublisher 
+      from order o join customer c 
+      on o.cusiud = c. custod
+      join book b 
+      on o.bookid = b.bookid
+      =둘이 같은 내용임 
+      select (select name from customer where custid = o.custid ) as name 
+      , (select publicher from book where bookid = o.bookid) as publicher 
+      from order as o 
+      where custid = (selcet custid from order  where group by custid having count(custid)
+    -  예시 )
+      select  max(cnt)
+      from
+      (select manager_id , count(manager_id) as cnt
+      from employees
+      group by manager_id) as result 
+  -  6) 합집합 union 
+    컬럼의 개수가 같아야 한다 .

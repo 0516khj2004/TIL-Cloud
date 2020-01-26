@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let willEval ="";
+        willEval += 'var number =10;';
+        willEval += 'console.log(number);';
+
+        eval(willEval);
+
+        let a = parseInt('123');
+        let b = parseFloat("$3.14");
+
+        console.log(a);
+        console.log(b);
+
+        let won = "1000원";
+        let doller = "1.5$";
+
+        console.log(Number(won) + "/"+Number(doller));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

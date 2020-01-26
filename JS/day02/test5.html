@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function test(a,b,c){
+            console.log(a);
+            console.log(a+b);
+            console.log(a+b+c);
+        }
+
+        test(10,100);
+
+        function power(){
+            if(arguments.length ==1){
+                console.log(arguments[0]* arguments[0]);
+            }else if(arguments.length ==2){
+                console.log(arguments[0] ** arguments[1]);
+            }
+        }
+
+        power(3);
+        power(2,4);
+
+        function multiply(){
+            let result =1;
+            for( let i =0; i< arguments.length; i++ ){
+                result *= arguments[i];
+            }
+            console.log(result);
+        }
+        
+        multiply(2,3,4,5,6)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
