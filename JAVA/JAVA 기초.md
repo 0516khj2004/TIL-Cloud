@@ -92,5 +92,47 @@
 ### 5. 제어문
 
 - 조건문
+
   - if
-  - if -else 
+  - if -else  --- 조건 연산자로 구현 가능함 
+  - if -else if -else 
+  - 성적에 따라 학점 부여 하기 > 점수를 입력 받아서 학점을 출력 하세요
+
+  ```java
+  Scanner scanner = new Scanner(system.in)
+  int scor= scanner.netInt();
+  char grade;
+  if(score >=90 ){ grade="A";}
+  else if(score >=80){grade='B';}
+  else if(score >=70){grade='C';}
+  else if(score >=60){grade='D';}
+  else {grade ='F';}
+  system.out.printIn("점수:" + score);
+  system.out.printIn("학점:" + grade);
+  ```
+
+  - switch-case  - 각 월에 따른 한달 날짜 수를 출력하라
+
+  ```java
+  Scanner scanner = new Scanner(System.in);
+  int month = scanner.nextInt();
+  int day;
+  
+  switch(day){
+      case 1: case 3: case 5: case 7: case 8: case 10: case 12: 
+  		day =31;
+  		break;
+  	case 2:
+  		day =28;
+  		braek;
+      case 4: case 6: case 11:
+          day =31;
+          break;
+  }
+  system.out.println(month+"달은 " + day +"일입니다");
+  
+  ```
+
+  
+
+  
