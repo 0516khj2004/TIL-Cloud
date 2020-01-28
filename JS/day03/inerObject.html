@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+
+        let primtiviNumber = 273; // 속성, 메서드 추가 X
+        let objectNumber = new Number(273); // 속성, 메서드 추가 가능
+        Number.prototype.method = function(){
+            return " method on prototupe";
+        };
+
+        console.log("primitive:" + primtiviNumber);
+        console.log("object:" + objectNumber + "/"+ objectNumber.method());
+        
+
+        let myObject1 = new Object(); // 처음부터 가지고 만드는 방법 
+        let myObject2 = {}; //동적 추가
+        
+        console.log(myObject1);
+        console.log(myObject1.toString());
+
+        let student = {
+            name:"구현진",
+            grade:'1학년',
+            toString: function(){
+                return this.name + "/" + this.grade;
+            }
+        }
+        
+        console.log("Student:" + student);
+    
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

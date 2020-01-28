@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+
+        let students = [];
+        students.push({이름: 'aaa', 국어 :90, 수학:30 ,영어:70});
+        students.push({이름: 'bbb', 국어 :80, 수학:40 ,영어:60});
+        students.push({이름: 'ccc', 국어 :70, 수학:50 ,영어:50});
+        students.push({이름: 'ddd', 국어 :60, 수학:60 ,영어:40});
+        students.push({이름: 'eee', 국어 :50, 수학:70 ,영어:30});
+
+
+        for(let i in students){
+            //students[i].sum = students[i].국어 + students[i].수학 +students[i].국어+ students[i].영어 ; 
+            //students[i].avg = students[i].sum /3;
+            
+            students[i].sum = function(){
+                return this.국어 + this.영어+ this.수학;
+            }
+            students[i].avg = function(){
+                return this.sum() /3 ;
+            }
+        }
+
+        let totalsum = 0;
+        let totalavg =0;
+
+        for(let i in students){
+            with(students[i]){
+                console.log(이름 + "/" +sum() + "/" + avg());
+                totalsum += sum();
+            }
+        }
+        
+        console.log("전체평균:" + +(totalsum/ students.length/3));
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
