@@ -324,4 +324,104 @@
     console.log(ipaddress.substring(4,6));	// 22
     ```
 
-    
+- **Array** 객체 
+
+  > ​	여러가지 자료를 쉽게 관리할 수 있게 도와주는 객체
+
+  - length 속성 = 배열의 요소가 몇개 인가 
+
+    - concat()
+
+    - pop() -> 마지막 데이터 값을 가져온다 - 데이터는 삭제됨
+
+      ```
+      let total = students.length
+          for ( let i=0 ; i<total; i++){
+          console.log(students.pop());
+      }
+      ```
+
+    - push() -> 마지막 부분에 새로운 요소 추가 
+
+    - sort() -> 배열을 정리할때
+
+      ```
+      students.sort(function(left, right){
+      	return right.sum() - left.sum();
+      });                     // 내림차순 (left - right)순서 바꾸면 오름차순
+      ```
+
+      
+
+    - splice() -> 부분 삭제
+
+- **Date**객체
+
+  > 현재 시간 출력
+
+  let now = new Date()
+
+- **Math**객체
+
+  - abc()
+  - ceil()
+  - floor()
+  - pow()
+  - round()
+  - random()
+  - pow(x,y) -> x 제곱 y 
+  - max()
+  - min()
+
+- ECMAScript 5 **Array**객체
+
+  - forEach() -> 배열 각각의 요소를 사용해 특정 함수를 for in반복문처럼 실행
+
+    ```javascript
+     let array = [ 50,200,242,516,5,314,325,602,426,818];
+     array.forEach(function(element){
+     	console.log(element);
+     });
+    ```
+
+  - map() -> 기존의 배열에 특정 규칙을 적용해 새로운 배열을 만든다
+
+    ```
+    let newMAp = array.map(function(element){
+    	return element *10;
+    });
+    ```
+
+  - filter() - > 특정 조건을 만족하는 요소를 추출해 새로운 배열을 만든다
+
+    ```
+    let rank = [90,52,45,23,12,74,88,55]
+    rank = rank.filter(function(element, index, array){
+    	return element >=60; 
+    })
+    ```
+
+  - reduce() or reduceRight()
+
+- ECMAScript 5 **Json**객체
+
+  - JSON.parse() -> JSON문자열을 자바스크립트 객체로 뱐환합니다.
+
+    ```
+    let openapi= `{
+    	"weather": [
+    		{
+    		"main": "clear"
+    		}
+    	],
+    	"main": {
+    		"temp":281.52
+    	}
+    }`
+    let parsedJson = JSON.parse(openapi);
+    console.log("현재온도:"+ parsedJson.main.temp);
+    console.log("현재날씨:" + parsedJson.weather[0].main);
+    ```
+
+  - JSON.stringify() -> 자바스크립트 객체를 JSON문자열로 반환합니다.
+

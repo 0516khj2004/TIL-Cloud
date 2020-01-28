@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        let array = [90,95,85,45,12,65,41,33,5,16];
+
+        
+
+        let grade  = array.map(function(element){
+            if(element >= 90 ){
+                return "A";
+            }else if(element >= 80 ){
+                return "B";
+            }else if(element >= 70 ){
+                return "C";
+            }else if(element >= 60 ){
+                return "D";
+            }else{
+                return "F";
+            }
+        });
+
+       for(let i=0; i<array.length ; i++){
+           console.log(array[i] + "->" + grade[i]);
+       }
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

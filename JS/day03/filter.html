@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+         let rank = [90,95,85,45,12,65,41,33,5,16];
+
+         function myfiler(element, index, array){
+            return element >=60; 
+         };
+
+         rank = rank.filter(myfiler);
+
+         rank.forEach(function(element){
+             console.log(element);
+         })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

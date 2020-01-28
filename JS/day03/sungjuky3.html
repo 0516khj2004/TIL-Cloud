@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        
+        function Students(name, kor, mat, eng){
+            this.이름 = name;
+            this.국어 = kor;
+            this.수학 = mat;
+            this.영어 = eng;
+
+            this.sum = function(){
+                return this.국어 + this.영어 + this.수학;
+            };
+
+            this.avg = function(){
+                return this.sum() / 3;
+            };
+        }
+
+        let students = [];
+        students.push(new Students('aaa',80,40,60));
+        students.push(new Students('bbb',70,50,40));
+        students.push(new Students('ccc',60,40,50));
+        students.push(new Students('ddd',20,40,90));
+        students.push(new Students('eee',10,30,20));
+
+        //let total = students.length
+        //for ( let i=0 ; i<total; i++){
+        //    console.log(students.pop());
+        //}
+
+        let totalsum = 0;
+        
+        function myfilter(element, index, array){
+            return element.sum() >=160;
+        };
+
+        let high = students.filter(myfilter);
+
+        high.forEach(function(element){
+            console.log(element.이름 + "/" + element.sum());
+        })
+
+
+
+        students.sort(function(left, right){
+            return right.sum() - left.sum();
+        });
+        
+        for(let i in students){
+            with(students[i]){
+                console.log(이름 + "/" +sum() + "/" + avg());
+                totalsum += sum();
+            }
+        }
+        
+
+        console.log("전체평균:" + +(totalsum/ students.length/3));
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
