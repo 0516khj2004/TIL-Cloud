@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = () => {
+            let counter = document.getElementById("counter");
+
+            let plusBtn = document.getElementById("plus");
+            plusBtn.onclick = function(){
+                counter.innerText++;
+            }
+            let minusBtn = document.getElementById("minus");
+            minusBtn.onclick = function(){
+                counter.innerText--;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 id="counter">0</h1>
+    <button id="plus">+</button>
+    <button id="minus">-</button>
+</body>
+</html>

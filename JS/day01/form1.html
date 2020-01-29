@@ -23,18 +23,35 @@
                 console.log(inputs[i]);
             }
         }
+        window.onload = function(){
+            let btnNext = document.getElementById("btnNext");
+
+            btnNext.onclick = function(){
+            let _name = document.getElementById("txtName");
+            let _id = document.getElementById("txtId");
+            let _pw = document.getElementById("txtpw");
+
+            if (_name.value == "" || _id.value =="" || _pw.value == ""){
+                alert("*은 필수 입니다.");
+                return;
+            }
+            let frm =document.getElementById("registForm");
+            frm.submit();
+            }    
+        }
 
     </script>
 </head>
 <body>
-    <form action="regist.html" method="Post">
-        이름: <input type="text" placeholder="이름을 입력하세요" name="name"><br><br>
-        아이디:  <input type="text" placeholder="아이디를 입력하세요" name="id"><br><br>
-        비밀번호: <input type="password" placeholder="pw을 입력하세요" name="pw"><br><br>
+    <form action="regist.html" method="Post" id="registForm">
+        <div>*는 필수 입력 사항입니다</div>
+        *이름: <input type="text" id= "txtName" placeholder="이름을 입력하세요" name="name"><br><br>
+        *아이디:  <input type="text" id="txtId" placeholder="아이디를 입력하세요" name="id"><br><br>
+        *비밀번호: <input type="password" id="txtpw" placeholder="pw을 입력하세요" name="pw"><br><br>
         남성:<input type="radio" name="gender">
         여성:<input type="radio" name="gender">
         <p>
-        사용하는 sns: 
+        *사용하는 sns: 
         <input type="checkbox" name="sns" value="facebook"> facebook
         <input type="checkbox" name="sns" value="twitter"> twitter
         <input type="checkbox" name="sns" value="google"> google
@@ -51,7 +68,7 @@
         <textarea cols="50" rows="10" name="pp"></textarea><br><br>
         <input type="submit" value="회원가입">
         <input type="button" value="임시저장" onclick="saveTemporary()">
-        <input type="reset" value="초기화">
+        <input type="button" value="다음단계" id=btnNext >
     </form>
 </body>
 </html>
