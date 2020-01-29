@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery/jquery.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $("#buttonred").on('click', function(){
+                $("#myh1").css('color','red');
+            });
+            $("#buttonblue").on('click',function(){
+                $("#myh1").css('color','blue');
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1 id="myh1">hello, jquery</h1>
+    <button id="buttonred">Red</button>
+    <button id="buttonblue">BLUE</button>
+</body>
+</html>
