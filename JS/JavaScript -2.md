@@ -425,3 +425,68 @@
 
   - JSON.stringify() -> 자바스크립트 객체를 JSON문자열로 반환합니다.
 
+### 9. 브라우저 객체 모델 
+
+> 모든 객체는 속성과 메서드를 가지고 있다.
+
+- window 객체 
+
+  - alert() - > 경고 상자
+
+  - prompt() -> 
+
+  - open() -> 새로운 윈도우 창 열기 
+
+    ```
+    window.open("http://www.naver.com","mynaver","width=600, height=400",true);
+    // 사이즈를 명시하지 않으면 같은 크기의 브라우저가 열린다 
+    ```
+
+    ```
+    이벤트 속성 이용 - onclick
+    <script>
+    	 function myOpen(url){ window.open(url)}
+    </script>
+    
+    <body><ul>
+    <li><a onclick="myOpen('http://www.naver.com')">naver</a></li>
+    <li><button onclick="myOpen('https://www.google.co.kr')">google</button></li>
+    </ul></body>
+    ```
+
+  - onload 이벤트 속성 -> 화면에 데이터가 읽어올때 발생하는 이벤트 
+
+    > on으로 시작하는 속성을 이벤트 속성이라고 한다.
+
+    ```
+    <script>
+        console.log('Process - 0');
+        window.onload = function(){
+        console.log('Process - 3');
+        }
+    </script>
+    </head>
+    <body>
+        <h1>Process - 1</h1>
+        <script>console.log("Process - 1");</script>
+        <h1>Process - 2</h1>
+        <script>console.log("Process - 2");</script>
+    </body>
+    
+    ----------------결과값-----------------------
+    Process - 0       
+    Process - 1
+    Process - 2
+    Process - 3        //onload는 가장 마지막에 실행
+    ```
+
+     
+
+- location 객체 - 주소값으로 이동 
+
+  -  href -> location.href="https://www.multicampus.com"
+
+- navigator 객체 -> 반응형 웹을 구현할 때 사용 
+
+  
+
