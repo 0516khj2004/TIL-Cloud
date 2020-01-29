@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let weather_json = `
+        {
+    "weather": [
+    {
+    "main": "Clouds",
+    "description": "overcast clouds",
+    "icon": "04d"
+    }
+    ],
+    "main": {
+    "temp": 7.7,
+    "temp_min": 10.7,
+    "temp_max": 7.7,
+    "humidity": 41
+    },
+    "wind": {
+    "speed": 1.86
+    },
+    "dt": 1580272501
+    }`;
+
+    
+    window.onload = function(){
+        let _img =document.getElementById('_img');
+        let _temp =document.getElementById('_temp');
+        let _temp_min =document.getElementById('_temp_min');
+        let _temp_max =document.getElementById('_temp_max');
+        let _wind =document.getElementById('_wind');
+
+        let paserdJson = JSON.parse(weather_json);
+        
+        let _image = document.createElement("img");
+        _image.src = "http://openweathermap.org/img/wn/"+paserdJson.weather[0].icon +"@2x.png";
+        _img.appendChild(_image);
+        
+        _temp.innerHTML = "현재온도"+ paserdJson.main.temp +" 도"+","+
+        paserdJson.weather[0].main;
+
+        _temp_min.innerHTML = paserdJson.main.temp_min;
+
+        _temp_max.innerHTML = paserdJson.main.temp_max;
+        _wind.innerHTML = "풍속"+paserdJson.wind.speed + "/"+ "습도"+paserdJson.main.humidity
+    }
+    </script>
+</head>
+<body>
+<table >
+    <tr>
+        <td rowspan="2" id="_img"></td>
+        <td colspan="2" id=_temp></td>
+        
+    </tr>
+    <tr>
+        <td>
+            <span id="_temp_min" style="color: blue;">10</span>/ 
+            <span id="_temp_max" style="color: red;">20</span>
+        </td>
+        <td id="_wind"></td>
+    </tr>
+</table>    
+</body>
+</html>

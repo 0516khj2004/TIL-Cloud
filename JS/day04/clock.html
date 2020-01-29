@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            let clock = document.getElementById("clock");
+
+            setInterval(function(){
+            clock.innerHTML = new Date().toString();
+            },1000);
+
+            clock.onclick = function(){
+                clock.style = "color:red;"
+                clock.style.backgroundColor = "blue";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 id="clock"></h1>
+</body>
+</html>

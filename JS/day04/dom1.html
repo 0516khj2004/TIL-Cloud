@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            let h1_tag = document.createElement('h1');
+            let greeting_text =document.createTextNode("Hi, there");
+            let ul_tag = document.createElement('ul');
+            let li_tag1 = document.createElement('li');
+            let li_tag2 = document.createElement('li');
+            let naver_text = document.createTextNode("naver");
+            let daum_text = document.createTextNode("daum");
+
+            
+            ul_tag.appendChild(li_tag1);
+            ul_tag.appendChild(li_tag2);
+            li_tag1.appendChild(naver_text);
+            li_tag2.appendChild(daum_text);
+            document.body.appendChild(h1_tag);
+            document.body.appendChild(ul_tag);
+            h1_tag.appendChild(greeting_text);
+
+            //이미지 태그 
+            let myImg = document.createElement("img");
+            myImg.src = "cotroller.png";
+            myImg.width = 500;
+            myImg.height = 350;
+            document.body.appendChild(myImg);
+
+            //document.getElementById(blue).innerHTML ="<h1 style='color:blue;'>HELLOW</h1>";
+
+            let div1 = document.getElementById("myDiv1");
+            div1.innerHTML = "<h1 style='color:blue;'>HELLOW</h1>";
+            document.body.removeChild(document.getElementById('myh1'));
+
+            
+        }
+
+    </script>
+</head>
+<body>
+    <h1 id="myh1">Hellow DOM</h1>
+    <div id="myDiv1">  </div>
+</body>
+</html>

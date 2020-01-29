@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script>
+        function saveTemporary(){
+            let selectsns = document.getElementsByName("sns");
+            let selectedcount = 0 ;
+            for(let i=0; i<selectsns.length; i++){
+                if(selectsns[i].checked){
+                selectedcount++;
+                console.log(selectsns[i].value);
+                }
+            }
+            if(selectedcount ==0){
+                alert("sns 필수 선책사항이다")
+            }
+            let inputs = document.getElementsByTagName('input');
+            for(let i=0; i<inputs.length;i++){
+                console.log(inputs[i]);
+            }
+        }
+
+    </script>
 </head>
 <body>
     <form action="regist.html" method="Post">
@@ -15,10 +35,10 @@
         여성:<input type="radio" name="gender">
         <p>
         사용하는 sns: 
-        <input type="checkbox" name="sns"> facebook
-        <input type="checkbox" name="sns"> twitter
-        <input type="checkbox" name="sns"> google
-        <input type="checkbox" name="sns"> instagram
+        <input type="checkbox" name="sns" value="facebook"> facebook
+        <input type="checkbox" name="sns" value="twitter"> twitter
+        <input type="checkbox" name="sns" value="google"> google
+        <input type="checkbox" name="sns" value="instagram"> instagram
         </p>
         연령:
         <select name="age">
@@ -30,7 +50,7 @@
         자기소개 : 
         <textarea cols="50" rows="10" name="pp"></textarea><br><br>
         <input type="submit" value="회원가입">
-        <input type="button" value="임시저장">
+        <input type="button" value="임시저장" onclick="saveTemporary()">
         <input type="reset" value="초기화">
     </form>
 </body>
