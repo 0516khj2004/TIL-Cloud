@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            let array =[
+                {name: 'Naver', link: 'http://www.naver.com'},
+                {name: 'Goole', link: 'http://www.naver.com'},
+                {name: 'Daum', link: 'http://www.naver.com'},
+                {name: 'Multi', link: 'http://www.naver.com'},
+
+            ];
+
+            //for(let i=0; i< array.length; i++){
+            //    console.log(array[i].name);
+            // }
+            //let output ="";
+            //$.each(array,function(index, item){
+            //    let _ul = document.createElement('ul');
+            //    let _li = document.createElement('li');
+            //    let _text = document.createTextNode(item.name+ "("+ item.link + ")");
+            //    document.body.appendChild(_ul);
+            //    _ul.appendChild(_li);
+            //    _li.appendChild(_text);
+            //});
+
+            let output1="<ul>";
+            $.each(array, function(index, item){
+                output1 += "<li>" + item.name +"("+item.link+")</li>";
+            });
+            output1 += "</ul>";
+
+            //document.getElementById('contents').innerHTML = output1;
+            $('#contents').append(output1);
+            //$('선택자').each(function(){});
+        });
+    </script>
+</head>
+<body>
+    <div id = "contents"></div>
+</body>
+</html>

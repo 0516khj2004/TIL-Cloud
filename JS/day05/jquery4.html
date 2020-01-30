@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                let value = $('select > option:selected').val();
+                console.log(value);
+            },1000);
+        });
+    </script>
+</head>
+<body>
+    입력필드(일반)<input type="text" id="input1"><br>
+    입력필드(pw)<input type="password" id="input2"><br>
+    라디오(남성):<input type="radio" id="input3" value="M" ><br>
+    라디오(여성):<input type="radio" id="input3" value="F"><br>
+    체크박스:<input type="checkbox" id="input4"><br>
+    
+    히든(숨김):<input type="hidden" id="input6"><br>
+
+    <select id="myselect">
+        <option value="apple">사과</option>
+        <option value="banana">바나나</option>
+        <option value="orange">오렌지</option>
+        <option value="kiwii">키위</option>
+      
+    </select>
+    <button type="button" id="btn1">전송</button>
+</body>
+</html>
