@@ -52,3 +52,53 @@
 
 # Aiax
 
+- .ajax()메서드 
+
+  -  $.ajax({
+
+    ​        url: "./data.html",
+
+    ​        success: function(data){},
+
+    ​        error: function(){}
+
+    ​      });
+
+  -  $.ajax("./data.html",{
+
+    ​        success: function(data) {},
+
+    ​        error: function(){}
+
+    ​      });
+
+- local /server 
+
+  - local 
+
+    url : "./ .json"
+
+  - server 
+
+    https://api.openweathermap.org/data/2.5/forecast
+
+    - 파라미터  ? querystring -> get          form data <- post
+
+    ?q=Seoul&
+
+    APPID=2908634d21bce647335caa5529f4a1f9&
+
+    units=metric
+
+    ```
+    url: "https://api.openweathermap.org/data/2.5/forecast",
+    method: "GET",
+    data: {
+        q: "Seoul",
+        APPID: "2908634d21bce647335caa5529f4a1f9",
+        units: "metric"
+    },
+    ```
+
+    
+
