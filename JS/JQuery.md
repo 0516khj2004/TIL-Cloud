@@ -50,7 +50,7 @@
 
 
 
-# Aiax
+# Aiax - 비동기식 
 
 - .ajax()메서드 
 
@@ -71,6 +71,14 @@
     ​        error: function(){}
 
     ​      });
+
+- .ajax()메서드 옵션
+
+  - error
+  - success
+  - utl
+  - data 
+  - 
 
 - local /server 
 
@@ -100,5 +108,16 @@
     },
     ```
 
-    
+  - get/post 
+  
+    - get -> 서버에서 데이터 가져옴
+    - post -> 입력상자의 값을 가져옴
+    - put -> 서버가 가진 리소스 변경
+    - delete -> 서버가 가진 리소스 삭제
+  
+- $(선택자).serialize( ) 
+
+  > 입력양식의 내용을 요청 매개변수 문자열로 만든다 - <form>태그가 있어야 한다 
+
+  
 

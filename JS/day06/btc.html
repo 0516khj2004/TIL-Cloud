@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: "https://poloniex.com/public",
+                type: "GET",
+                data: {
+                    command : "returnChartData",
+                    currencyPair : "USDT_BTC",
+                    start : "1577836800",
+                    end : "9999999999",
+                    period : "86400"
+                },
+                success: function(data){
+                    $.each(data, function(index, item) {
+                        function unix(t){
+                            let date = new Date(t*1000);
+                            let year = date.getFullYear();
+                            let month = "0" + (date.getMonth() +1);
+                            let day = "0" + date.getDate();
+                            return year+"년" +month.substr(-2)+"월"+ day.substr(-2) +"일";
+                        }
+                        let _date = unix(item.date);
+                        let _html = "<span> DATE:" +_date+ "</span>";
+                        _html += "<span style='color:blue;'> LOW: " +item.low + "</span>";
+                        _html += "<span style='color:red;'> HIGH: " + item.high + "</span>";
+                        _html += "<span> VOLUME: " + item.volume + "</span>";
+                        
+                        
+
+                        let div = document.createElement("div");
+                        div.innerHTML = _html
+                        
+                        $('#contents').append(div);
+                    })
+                }
+
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="contents">
+        
+    </div>
+</body>
+</html>

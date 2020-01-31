@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+  <!-- 차트 링크 --> 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+  <script>
+    $(document).ready(function() {
+        let dateArr =[];
+        let highArr=[];
+        let lowArr =[];
+        $.ajax({
+                url: "https://poloniex.com/public",
+                type: "GET",
+                data: {
+                    command : "returnChartData",
+                    currencyPair : "USDT_BTC",
+                    start : "1577836800",
+                    end : "9999999999",
+                    period : "86400"
+                },
+                success: function(data){
+                    $.each(data, function(index, item) {
+                        function unix(t){
+                            let date = new Date(t*1000);
+                            let year = date.getFullYear();
+                            let month = "0" + (date.getMonth() +1);
+                            let day = "0" + date.getDate();
+                            return  +month.substr(-2)+"월"+ day.substr(-2) +"일";
+                        }
+                        let _date = unix(item.date);
+                        dateArr.push(_date);
+                        highArr.push(item.high);
+                        lowArr.push(item.low)
+
+                        
+                        let _html = "<span> DATE:" +_date+ "</span>";
+                        _html += "<span style='color:blue;'> LOW: " +item.low + "</span>";
+                        _html += "<span style='color:red;'> HIGH: " + item.high + "</span>";
+                        _html += "<span> VOLUME: " + item.volume + "</span>";
+                        
+                        
+
+                        let div = document.createElement("div");
+                        div.innerHTML = _html
+                        
+                        $('#contents').append(div);
+
+                        let ctx = document.getElementById('myChart').getContext('2d'); 
+      let chart = new Chart(ctx, { 
+        type: 'line', 
+        data: { 
+          labels: dateArr,
+          datasets: [{ 
+            label: 'My First dataset', 
+            backgroundColor: 'transparent', 
+            borderColor: 'red', 
+            data: highArr
+          },
+          { 
+            label: 'My First dataset', 
+            backgroundColor: 'transparent', 
+            borderColor: 'blue', 
+            data: lowArr
+          }
+          ] 
+          
+        }, 
+        options: {
+          legend: { 
+            display: false 
+          }
+        } 
+      }); 
+                    })
+
+                    
+                }
+
+            })
+      
+
+     
+    });
+  </script>
+</head> 
+<body> 
+  <div class="container"> 
+    <canvas id="myChart"></canvas> 
+    <div id="contents"></div>
+  </div> 
+</body>
+</html>
+</head> 
+<body> 
+  <canvas id="myChart"></canvas> 
+  <div class="container">
+  <div id="contents"></div>
+  </div> 
+</body>
+</html>

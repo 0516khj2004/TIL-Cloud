@@ -8,16 +8,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+            $('#btnSubmit').on('click',function(){
+           // let city = $('#city').val();
+           let city = $('select > option:selected').val();
+            //if(city != null && city !=''){
+                
+            
             $.ajax({
                 url: "https://api.openweathermap.org/data/2.5/forecast",
                 method: "GET",
-                data: {
-                    q: "Seoul",
+                data: { 
+                    q: city,
                     APPID: "2908634d21bce647335caa5529f4a1f9",
                     units: "metric"
                 },
                 success: function(data){
-               
+                $('#contents').empty();
                 $.each(data.list, function(index, item) {
                 let _image = document.createElement("img");
                 _image.src = "http://openweathermap.org/img/wn/"+ item.weather[0].icon +"@2x.png";
@@ -36,21 +42,28 @@
                 let div = document.createElement("div");
                 div.appendChild(imageSpan);
                 div.appendChild(infoSpan);
-
+                
                 $('#contents').append(div);
-             });
+                 });
                 }
                 
             });
-
-            
+      
+        //}
+            });
         });
     </script>
 </head>
 <body>
+    
+        <!--<input type="text" name="city" id="city" placeholder="도시를 입력하세여">-->
+    <select id=city>
+        <option value="seoul">서울</option>
+        <option value="london">런던</option>
+        <option value="tokyo">도쿄</option>
+    </select>   
+    <button id="btnSubmit" onclick="" >검색</button>
     <div id="contents">
-        나라를 입력세요 : <input type="text">
-        <button type="subner" >제출</button>
     </div>
 </body>
 </html>
