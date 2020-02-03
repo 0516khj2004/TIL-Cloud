@@ -7,7 +7,7 @@
   let add = function() { }                -- add변수처럼 사용 
 
   ```html
-   <script>
+  <script>
    let func = function(a) {
   	 let output = prompt(a + "님, 숫자를 입력하세여");
   	 alert(output);
@@ -33,6 +33,22 @@
   let result = func2("koo");
   ```
 
+- 콜백함수 - > 익명함수를 매개변수에 곧바로 넣은 함수 
+
+  ```
+  function callNTime(n, callback){
+      for(let i=0; i< n; i++){
+      callback();
+      }
+  }
+  
+  callNTime(4,function(){
+  	alert("출력합니다");
+  });
+  ```
+
+  
+
 - Array함수 
 
   ```javascript
@@ -49,8 +65,8 @@
 
 - 타이머 함수 
 
-  - setInterval( ) - 함수를 반복해서
-  - setTimeout( ) - 일정 시간후 종료
+  - setInterval( ) - 함수를 반복해서 -> clearInterval() 타이머 제거
+  - setTimeout( ) - 일정 시간후 종료 ->clearTimeout() 타이머 제거
 
   ```javascript
   setTimeout(function(){ alert('test'); },3000);
@@ -70,12 +86,12 @@
 
 - 숫자 확인 함수
 
-  - isFinite( )   --> number가 무한한 값인지 확인
+  - isFinite( )   --> number가 무한한 값인지 확인 - 셀수있으면 true 
   - isNaN()  --> number가 NaN인지 확인
 
   ```javascript
   let a = parseInt('123');
-  let b = parseIoat("3.14");
+  let b = parseFIoat("3.14");
   
   console.log(typeof a);
   console.log(typeof b);

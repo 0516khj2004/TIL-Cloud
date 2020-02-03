@@ -15,14 +15,16 @@
 - 기본 함수 
 
   - alert() 경고창
-  - confirm() 확인창(버튼 2개)
-  - prompt() 입력창 
+  - confirm() 확인창(버튼 2개) -> 불 입력창
+  - prompt() 입력창  - > 문자
 
 ### 2. 기본문법
 
+- 표현식 : 값을 만드는 식
+
 - 키워드 : 자바스크립트가 처음 만들어질 때 정해진 특별한 의미가 있는 단어
 
-- 식별자
+- 식별자 
   - 키워드 안됨
   - 숫자로 시작하면 안됨 
   - 특수문자 안됨( _ ,$ 만 허용)
@@ -41,6 +43,11 @@
   
     */
   
+- 출력 
+
+  - alert()
+  - console.log
+
 - 자료형
 
   - 숫자 자료형 - 사칙연산( + - * / %)
@@ -49,18 +56,19 @@
 
   - 불 자료형   
 
-    - 비교연산자 (=== , !== // 값과 data type이 같(다르)다)
-
+    - 비교연산자 (==, != ) // 값이 값으면 - 유연하게)
+  - 일치연산자 (===, !==) // 값과 데이타타입이 같아야한다
+    
     ```javascript
      var a = 10;
      var b = "10";
      console.log(a == b);     // true
      console.log(a === b);    // false
-    ```
-
+  ```
+    
     - 논리연산자( !-not ,  &&-모두 참일때만 참 논리곱 ,||-모두 거짓일때만 거짓논리합)
-    - 조건문  
-
+  - 조건문  
+    
     ```javascript
     var userValue = prompt("값을 입력하세요!");
     console.log("당신이 입력한 값은 " + userValue);
@@ -90,7 +98,10 @@
      console.log("당신이 입력한 값은 " + userValue);     // let오류 
     ```
 
-  - const - 상수값(한번 정해지면 겂 갱신 x)을 사용할때 
+  - const - 상수값(한번 정해지면 값 갱신 x)을 사용할때 
+
+    - const a =10;    // ok 변경하지 않을 때
+    - const b ; b=10  // x  값이 변경 되면 안된다.
 
   - 복합 대입 연산자 
 
@@ -132,24 +143,59 @@
      console.log(typeof(b));  //string
      console.log(a === b)     //false
     ```
+    
+    - String() 
+    - Number
+    - boolean
+    - object -> 객체
+    - function() -> 함수 
+    - undefined
 
 - 숫자와 문자열 자료형 변환 **casting-> 형변환**
 
-  - Number()
+  - 강제 자료형 변환
 
-    - NaN(Not a Number)
+    - 개발자가 원하는 시점에 특정한 코드로 자료형 변환 
 
+  - Number() ->숫자로 변환 
+  
+    - 숫자처럼 생긴 문자열 변환
+    - 숫자처럼 생기지 않은 문자열 변환 (NaN으로 변환)
+    - 불리언을 변환(true -1 false -0) 
+  
     ```javascript
-     let userdata = prompt("숫자를 입력하세요");
+   let userdata = prompt("숫자를 입력하세요");
      let cov = Number(userdata);
      let result = cov +10; 
     
-     console.log("restult=" + resu11lt);
+     console.log("restult=" + result);
     ```
+  
+  - String() 
+  
+    - 숫자를 문자열로 변환
+    - 불을 문자열로 변환 
+  
+  - Boolean()
+  
+    - 0, NaN,'',null,undefin -> false 
+  
+    - 나머지 - true
+  
+      
+  
+  - 자동 (암묵적) 자료형 변환
+  
+    - 내부적으로 일어나는 것
+  
+  -  문자열 + 숫자 
+  
+    - `+`  => 문자열로 변환
+    - `-` `/` `*` => 숫자열로 변환
+  
+- 템플릿 문자열 
 
-  - String()
-
-
+  - \`표현식 264+33 값을 ${264+33} 입니다`
 
 ### 3. 조건문
 
@@ -238,6 +284,10 @@
 
 - for in 
 
+  - for (let i in array){
+
+    }
+
 - do--while
 
 - while 
@@ -253,4 +303,7 @@
   alert(value);
   ```
 
-- continue
+- continue -> 현재 반복문을 벗어나 다음 반복문으로 넘어갈 때
+
+- break -> 적어도 하나를 벗어날 때 /  반복문에서 벗어 날때
+
