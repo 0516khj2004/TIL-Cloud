@@ -14,7 +14,7 @@
 
 - function  App() {}
 
-
+- const App = function(){ }
 
 ### 1. JSX 
 
@@ -113,4 +113,17 @@
   컴포넌트 내부에 선언하여 사용된느 보관용 데이터 값 
 
   동적인 데이터 처리
+
+- 전개 연산자 (바꾸고 싶은 데어터 값만 바꾸는 것 )
+
+  ```
+  this.setState({
+      info :{
+      name: 'koo',
+      ...this.state.info   // name은 변경되고 age은 그대로 나옴 
+      }
+  });
+  ```
+
+
 
