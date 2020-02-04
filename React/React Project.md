@@ -127,3 +127,13 @@
 
 
 
+### 2.생명주기 메서드
+
+1. constructor()    --> 초기화 단계 
+2. compontDidMount( ) -> render메서드의 첫번째 반환값이 실제 돔에 반영된 직후 호출
+3. shouldComponentUpdate() -> 성능 최적화를 위해 존재 
+4. componentWillUpdate() -> 
+5. componetDidUpdate() - >업데이트 단계에서 마지막으로 호출
+6. componentWillUnmount()-> 소멸단계에서 호출되는 유일한 생명 주기 메서드
+
+7. componentDidCatch -> 생명주기 메서드에서 발생한 예외를 처리
