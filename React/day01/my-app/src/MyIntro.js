@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class MyIntro extends Component{
     render(){
         const css = {
-            color : 'red',
+            color : 'blue',
             fontSize: '40px'
         }
         return(
