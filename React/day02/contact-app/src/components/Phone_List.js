@@ -1,12 +1,22 @@
 import React,{Component} from 'react'
+import PhoneItem from './phone_Item';
 
 class PhoneLIst extends Component{
     render(){
 
-        const {data} = this.props;
+        const {data, onRemove, update} = this.props;
+
+        
 
         const list = data.map( value =>
-           <div key={value.id}>{value.name} / {value.phone} </div>
+           (
+               <PhoneItem 
+               key = {value.id} 
+               info = {value}
+               onRemove = {onRemove}
+               update = {update}
+                 />
+           )
         );
         return(
             <div>

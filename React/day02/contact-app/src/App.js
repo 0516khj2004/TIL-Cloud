@@ -24,13 +24,35 @@ class App extends Component{
     })
     
   }
+
+  handleRemove = (selected_id) => {
+      const {contacts} = this.state;
+      
+      this.setState({
+      contacts: contacts.filter(
+        info => info.id !== selected_id )
+      });  
+  }
+
+  handleUpdate = (selected_id, data) => {
+    const {contacts} = this.state;
+    this.setState({
+      contacts: contacts.map(
+        item => item.id === selected_id ? {...item, ...data} : item
+      )
+    });
+}
+
   render(){
     const {contacts} = this.state
     return (
       <div>
           <PhoneForm 
             onCreate = {this.handleCreate} />
-          <PhoneLIst data = {this.state.contacts}/>
+          <PhoneLIst 
+          data = {this.state.contacts}
+          onRemove = {this.handleRemove}
+          update = {this.handleUpdate }/>
       </div>
     );
   }

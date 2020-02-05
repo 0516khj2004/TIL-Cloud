@@ -116,6 +116,8 @@
 
 - 전개 연산자 (바꾸고 싶은 데어터 값만 바꾸는 것 )
 
+  - [...myArray.slice(0,2), ...myArray.slice(3,5)] -> [1,2,4,5]
+  
   ```
   this.setState({
       info :{
@@ -184,6 +186,8 @@
 
     - map() - > 반복
 
+      myArray.map(v => v ** 2) -> 제곱
+
       ```
       render(){
           const {data} = this.props;
@@ -201,7 +205,15 @@
       <PhoneLIst data = {this.state.contacts}/>
       ```
 
-      
+    - filter()  --> 조건
 
+      myArray.filter(n => n !== 3)
 
+    - 수정
 
+      const modifiedArray2 = MyTag.map(v =>v.id === 1 ? ({...v , text:'React'}) : v);
+
+### 4. 
+
+- 삭제 
+- 수정
