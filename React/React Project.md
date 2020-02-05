@@ -10,7 +10,7 @@
 
   }
 
-  }
+  }        // 함수를 많이 사용 할 때 
 
 - function  App() {}
 
@@ -71,7 +71,7 @@
 
     `import './App.css';
 
-- props *부모->자식 
+- **props** *부모->자식 
 
   부모 컴포넌트가 자식 컴포넌트에게 전달하는 값 
 
@@ -108,7 +108,7 @@
 
   
 
-- state *자기자신
+- **state** *자기자신
 
   컴포넌트 내부에 선언하여 사용된느 보관용 데이터 값 
 
@@ -124,8 +124,10 @@
       }
   });
   ```
+  
+- `<div></div>`
 
-
+- `<Fragment></Fragment>`
 
 ### 2.생명주기 메서드
 
@@ -137,3 +139,69 @@
 6. componentWillUnmount()-> 소멸단계에서 호출되는 유일한 생명 주기 메서드
 
 7. componentDidCatch -> 생명주기 메서드에서 발생한 예외를 처리
+
+
+
+### 3. Demo
+
+- 부모 컴포넌트에 저장 전달 
+
+  > ​	부모 컴포넌트의 함수를 자식 컴포넌트에 전달 - > 자식 컴포넌트에서 부모의 함수 호출
+
+  - 부모
+
+    - 자식한테 받은 데이터 쌓기
+
+    ```
+    handleCreate =(data) => {
+        this.setState({
+            constacts: [ 
+                ...this.state.constacts,
+                {
+                id : this.id++,
+                ...data
+                }
+            ]
+    
+        })
+    }
+    
+    -------------------------------------------------
+    handleCreate =(data) => [
+        const {constacts} = this.state   // 비구조 할당 
+        this.setState({
+            constacts: constacts.concat({id: this.id++, ...data})
+        })
+    }
+    
+    const {contacts} = this.state
+    {JSON.stringify(contacts)}
+    ```
+
+    - 비구조 할당 
+
+      - const {contacts} = this.state   => this.state.contacts ?
+
+    - map() - > 반복
+
+      ```
+      render(){
+          const {data} = this.props;
+              const list = data.map( value =>
+                  <div key={value.id}>{value.name} / {value.phone} </div>
+              );
+              return(
+                  <div>
+                  {list}
+              </div>
+          );
+      }
+      
+      APP.js
+      <PhoneLIst data = {this.state.contacts}/>
+      ```
+
+      
+
+
+

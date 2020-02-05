@@ -16,7 +16,7 @@ class Counter extends Component {
     });
   }
 
-
+ get
   handleIncrease = () => {
     this.setState({
       count: this.state.count + 1
