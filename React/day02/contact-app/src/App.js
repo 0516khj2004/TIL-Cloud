@@ -15,7 +15,7 @@ class App extends Component{
     ]
   }
 
-  handleCreate =(data) => {
+  handleCreate = (data) => {
     console.log(data);
 
     const {contacts} = this.state
