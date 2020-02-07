@@ -11,18 +11,26 @@ class SearchBar extends Component{
     
     onInputChange = (e) => {
         this.setState({
-            [e.target.name] : e.target.value 
+            term : e.target.value 
         })
-        //console.log(this.state)
     }
+    
+    onVideoSearch = (e) => {
+        e.preventDefault()
+        console.log(this.props)
+
+        this.props.search(this.state.term)
+    } 
     render() {
         return(
-            <div>
-            <input 
-            name = 'term'
-            onChange={this.onInputChange}
-            />
-            <div>Value of the input : {this.state.term}</div>
+            <div className='search-bar'>
+                <form onSubmit={this.onVideoSearch}>
+                    <input 
+                        name = 'term'
+                        onChange={this.onInputChange}
+                    />
+                    <button type='submit'>검색</button>
+                </form>
             </div>
             //<input onChange={event => console.log(event.target.value)}
             
