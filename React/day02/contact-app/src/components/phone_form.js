@@ -3,13 +3,15 @@ import React,{Component} from 'react';
 class PhoneForm extends Component{
     state = {
         name : '' , 
-        phone : ''
+        phone : '',
+       
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.name] : e.target.value
-        })
+        });
+
     }
     
     handleSubmit = (e) => {
@@ -20,6 +22,7 @@ class PhoneForm extends Component{
             phone : ''
         })
     }
+
 
     render(){
         return(
@@ -35,7 +38,7 @@ class PhoneForm extends Component{
                         placeholder='연락처를 입력하세요'
                         onChange={this.handleChange}
                         name = 'phone' />
-                    
+                
                     <button type= 'submit'>등록</button>
                 </form>
             </div>

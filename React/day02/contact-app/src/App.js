@@ -12,7 +12,8 @@ class App extends Component{
       name : '관리자',
       phone : '010-111-1111'
       }
-    ]
+    ],
+    keyword : ''
   }
 
   handleCreate = (data) => {
@@ -23,6 +24,11 @@ class App extends Component{
       contacts: contacts.concat({id: this.id++, ...data})
     })
     
+  }
+  handleSearch = (e) =>{
+    this.setState({
+      keyword : e.target.value
+    });
   }
 
   handleRemove = (selected_id) => {
@@ -41,18 +47,25 @@ class App extends Component{
         item => item.id === selected_id ? {...item, ...data} : item
       )
     });
-}
+  }
+
 
   render(){
-    const {contacts} = this.state
+    const {contacts, keyword} = this.state
+    const filterContacts = contacts.filter(v => v.name .indexOf(keyword) !== -1 );
+
     return (
       <div>
           <PhoneForm 
             onCreate = {this.handleCreate} />
+          <input 
+            placeholder= '검색하세요'
+            onChange={this.handleSearch}
+            value = {this.state.keyword} />
           <PhoneLIst 
-          data = {this.state.contacts}
+          data = {filterContacts}
           onRemove = {this.handleRemove}
-          update = {this.handleUpdate }/>
+          update = {this.handleUpdate } />
       </div>
     );
   }
