@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import YTSearch from 'youtube-api-search';
+import _ from 'lodash'
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_List';
 import VideoDetail from './components/video_detail'
@@ -35,7 +36,8 @@ class App extends Component {
       selectedvideo //: selectedvideo :사이로 둘다 이름이 같으면 궅이 : 뒤로 안써도 된다
     })
   }
-   
+  //const _videoSerch = _.debounce((term) =>{this.videoSearch(term)}, 300 );
+  //SearchBar search = _videoSerch
   render(){
     return(
       <div> 
