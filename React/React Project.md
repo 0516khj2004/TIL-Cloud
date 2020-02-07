@@ -207,13 +207,39 @@
 
     - filter()  --> 조건
 
-      myArray.filter(n => n !== 3)
+      myArray.filter(n => n !== 3 ? true : false)
 
+      [1,2,4,5]
+
+      myArray.filter(n => n === 3 ? true : false)
+    
+      [3]
+    
     - 수정
-
+    
       const modifiedArray2 = MyTag.map(v =>v.id === 1 ? ({...v , text:'React'}) : v);
+      
+      
 
-### 4. 
+### 4. React Router
 
-- 삭제 
-- 수정
+> Reactjs code snippets -rsc / rcc
+
+- SPA에서의 라우팅 문제를 해결하기 위해 사용되는 네비게이션 라이브러리
+
+- 브라우저 내장 객체 사용 가능 
+
+  - location
+  - history
+
+- React Router 
+
+  - Web
+  - Native
+  - react-route-dom 라이브러리 필요 (n)
+
+- Router - > Route 
+
+  <Route>path = "/" component = {Home}Home</Rou
+
+  <Route>path = "/about" component = {About}About </Reout>
