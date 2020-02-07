@@ -35,11 +35,11 @@ class App extends Component {
       selectedvideo //: selectedvideo :사이로 둘다 이름이 같으면 궅이 : 뒤로 안써도 된다
     })
   }
-  
+   
   render(){
     return(
       <div> 
-        <SearchBar search ={this.videoSearch}/>
+        <SearchBar search ={this.videoSearch}/> 
         <VideoDetail video = { this.state.selectedvideo} />
         <VideoList 
           videos= {this.state.videos} 

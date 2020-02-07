@@ -13,6 +13,8 @@ class SearchBar extends Component{
         this.setState({
             term : e.target.value 
         })
+        // this.props.search(e.target.value)
+
     }
     
     onVideoSearch = (e) => {
