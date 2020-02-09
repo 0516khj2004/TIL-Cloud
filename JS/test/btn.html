@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .item {
+          display: inline-block;
+          overflow: hidden;
+          width: 120px; 
+        }
+        .red {
+          color: red;
+        }
+        .blue {
+          color: blue;
+        }
+      </style>
+</head>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url : "https://poloniex.com/public",
+            type: "GET",
+            data: {
+                'command': 'returnChartData',
+                'currencyPair': 'USDT_BTC',
+                'start': '1577836800',
+                'end': '9999999999',
+                'period': '86400'
+            },
+            success: function(data){
+                $.each(data, function(index, item){
+                    function unix(t){
+                            let date = new Date(t*1000);
+                            let year = date.getFullYear();
+                            let month = "0" + (date.getMonth() +1);
+                            let day = "0" + date.getDate();
+                            return year+"년" +month.substr(-2)+"월"+ day.substr(-2) +"일";
+                    }
+
+                    let date = unix(item.data);
+                    let high = item.high;
+                    let low = item.low;
+                    let volume = item.volume;
+
+                    let div = document.createElement("div");
+                    let html = "";
+                    html += "<span class='item'>" + date + "</span>"; 
+                    html += "<span class='item red'>" + high + "</span>";
+                    html += "<span class='item blue'>" + low + "</span>";
+                    html += "<span class='item'" + volume + "</span>";
+                    div.innerHTML = html;
+
+                    $('#contents').append(div)
+
+                })
+            }
+        })
+    })
+</script>
+<body>
+</body>
+    <div id="contents"></div>
+</html>

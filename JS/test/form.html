@@ -7,39 +7,40 @@
     <title>Document</title>
     <script>
         function saveTemporary(){
-            let selectsns = document.getElementsByName("sns");
-            let selectedcount = 0 ;
-            for(let i=0; i<selectsns.length; i++){
-                if(selectsns[i].checked){
-                selectedcount++;
-                console.log(selectsns[i].value);
+            let _sns = document.getElementsByName('sns');
+            let selectedcount = 0;
+
+            for(let i=0; i<_sns.length; i++){
+                if(_sns[i].checked){
+                    selectedcount++ ;
+                    console.log(_sns[i].value);
                 }
             }
-            if(selectedcount ==0){
-                alert("sns 필수 선책사항이다")
+            if(selectedcount == 0){
+                alert('sns는 필수 선택사항이다')
             }
-            let inputs = document.getElementsByTagName('input');
-            for(let i=0; i<inputs.length;i++){
-                console.log(inputs[i]);
-            }
+            //let inputs = document.getElementsByTagName('input');
+            //for(let i=0; i<inputs.length; i++){
+            //    console.log(inputs[i]);
+            //}
+
         }
-        window.onload = function(){
-            let btnNext = document.getElementById("btnNext");
+        window.onload = function() {
+            let btnNext = document.getElementById('btnNext');
 
             btnNext.onclick = function(){
-            let _name = document.getElementById("txtName");
-            let _id = document.getElementById("txtId");
-            let _pw = document.getElementById("txtpw");
-
-            if (_name.value == "" || _id.value =="" || _pw.value == ""){
-                alert("*은 필수 입니다.");
-                return;
+                let _name = document.getElementById('txtName');
+                let _id  = document.getElementById('txtId');
+                let _pw = document.getElementById('txtpw');
+                
+                if(_name.value == '' || _id.value == '' || _pw.value == ''){
+                    alert('*은 필수 입니다')
+                    return ;
+                }
+                let _form = document.getElementById('registForm');
+                _form.submit();
             }
-            let frm =document.getElementById("registForm");
-            frm.submit();
-            }    
         }
-
     </script>
 </head>
 <body>
@@ -63,7 +64,7 @@
             <option value="20">20대</option>
             <option value="30">30대</option>
         </select><br>
-        사진: <input type="file" name="file"><br><br>
+        사진: <input type="file" name="fiel"><br><br>
         자기소개 : 
         <textarea cols="50" rows="10" name="pp"></textarea><br><br>
         <input type="submit" value="회원가입">

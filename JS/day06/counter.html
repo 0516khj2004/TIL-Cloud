@@ -7,19 +7,25 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        let counter = 0;
-       $(document).ready(function(){
-           $('#btnP').on('click',function(){
-               counter++;
-               $('#counter').text(counter);                     
-           })
-           $('#btnM').on('click',function(){
+        let counter = 0 ;
+        $(document).ready(function(){
+            $('#btnP').on('click',function(){
+                counter++;
+                $('#counter').text(counter);
+               
+            })
+            $('#btnM').on('click',function(){
                 counter--;
-                $('#counter').text(counter);                            
-           })
+                $('#counter').text(counter);
+               
+            })
+           
+            
+        })
+
+       
 
 
-       })
     </script>
 </head>
 <body>
