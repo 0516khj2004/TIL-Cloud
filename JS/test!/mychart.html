@@ -52,14 +52,19 @@
       let highArray = [];
       let lowArray = [];
       $.ajax({
-        url: "https://poloniex.com/public",
+        url : "https://api.rss2json.com/v1/api.json",
+        //url: "https://poloniex.com/public",
         type: "GET",
+        dataType : 'json',
         data: {
+          rss_url : "https://poloniex.com/public",
+          data : {
           'command': 'returnChartData',
           'currencyPair': 'USDT_BTC',
           'start' : startdate,
           'end': enddate,
           'period': '86400'
+          }
         }, 
         success: function(data) {
          $('#contents').empty();
