@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Item from './Item';
 
 class List extends Component {
-    shouldComponentUpdate(nextProps, nextState){
-        return nextProps.data !== this.props.data;
-    }
+    // shouldComponentUpdate(nextProps, nextState){
+    //     return nextProps.data !== this.props.data;
+    // }
     
     render() {
         const {data, onRemove} = this.props;

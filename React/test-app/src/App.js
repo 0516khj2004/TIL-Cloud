@@ -7,8 +7,8 @@ class App extends Component {
   state = {
     contacts : [
       {
-        id : 0,
-        todo : '리액트 소개'
+        id : "",
+        todo : ''
       }
     ],
   }
