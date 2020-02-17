@@ -1,57 +1,59 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Chart from '../components/chart';
+import axios from "axios";
+const ROOT_URL = `http://localhost:8800/api/blogs`;
 
 class WeatherList extends Component {
-  renderWeather(cityData){
-    console.log(cityData.data)
-    //const name = cityData.date;
+ 
+  constructor(props){
+    super(props);
+    this.state = { blogs: [], ajaxCalled: false };
+  }
 
-   // const country = cityData.high;
-    const high = cityData.data.map(btn => btn.high);
-    const low = cityData.data.map(btn => btn.low);
-    const volume = cityData.data.map(btn => btn.volume);
-    const quoteVolume = cityData.data.map(btn => btn.quoteVolume);
-    
-   //  const presures = cityData.list.map(weather => weather.main.pressure);
-   //   const humidities = cityData.list.map(weather => weather.main.humidity);
+  async componentDidMount() {
+    const { data: blogs } = axios.get(ROOT_URL)
+      .then(value => {
+        this.lsitingPost(value.data.blogs)
+      });
+  }
 
+  lsitingPost = (data) => {
+    this.setState({ ajaxCalled: true, blogs: data });
+  }
+
+  handleListHtml = (post) => {
+    console.log(post)
     return(
-      <tr key={cityData.currency}>
-            <th>{cityData.currency}</th>
-            <th><Chart data={high} color="orange"/></th>
-            <th><Chart data={low} color="red"/></th>
-            <th><Chart data={volume} color="black"/></th>
-            <th><Chart data={quoteVolume} color="pink"/></th>
-      </tr>
+      <Fragment>
+        <p>{post.id}</p>
+        <p>{post.title}</p>
+        <p>{post.author}</p>
+        <p>{post.contents}</p>
+        <p>{post.cdate}</p>
+      </Fragment>
     )
   }
 
   render() {
+    const { ajaxCalled, blogs } = this.state;
+    console.log(">>>", blogs);
+    if(!ajaxCalled){
+      return(<div>loading...</div>)
+    }
     return (
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>NAME </th>
-            <th>HIGH </th>
-            <th>LOW </th>
-            <th>VOLUME </th>
-            <th>QUOTEVOLUME</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.weather.map(this.renderWeather)}
-        </tbody>
-      </table>
-    );
+      <Fragment>
+        {blogs.map(value => this.handleListHtml(value))}
+      </Fragment>
+    )
   }
 }
 
+export default WeatherList;
 
 // mapSrtateToProps funciton
-function mapSrtateToProps(state){
-  return{ weather: state.weather};
-}
+//function mapSrtateToProps(state){
+ // return{ weather: state.weather};
+//}
 
 // connect mapping
-export default connect(mapSrtateToProps)(WeatherList);
+//export default connect(mapSrtateToProps)(WeatherList);
