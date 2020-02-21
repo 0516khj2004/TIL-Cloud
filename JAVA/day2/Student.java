@@ -1,29 +1,95 @@
 package com.example.day2;
 
-import java.util.Arrays;
+import java.util.Comparator;
 
 public class Student {
-    String name;
-    int kor;
-    int eng;
-    int mat;
-    int sum;
-    float avg;
 
-    Student(String name,int kor,int eng,int mat){
+    private String name;
+    private int kor, eng, math, sum;
+    private float avg;
+
+    public Student(String name, int kor, int eng, int math) {
         this.name = name;
         this.kor = kor;
         this.eng = eng;
-        this.mat = mat;
+        this.math = math;
+        calculate();
     }
 
-    void calculate(){
-        this.sum = this.kor + this.eng +this.mat;
-        this.avg = this.sum / 3.0f;
-
+    public void calculate() {
+        this.sum = this.kor + this.eng + this.math;
+        this.avg = (this.kor + this.eng + this.math) / 3.0f;
     }
-    void display(){
 
-        System.out.println(String.format("%s의 총점 : %s, 평균: %s", this.name,this.sum,this.avg));
+    @Override
+    public String toString() {
+        return String.format("%s\t(총점: %s / 평균: %.2f) = 국어: %s, 영어: %s, 수학: %s",
+                this.name, this.sum, this.avg, this.kor, this.eng, this.math
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Student temp = (Student) obj;
+        return this.kor == temp.kor && this.eng == temp.eng && this.math == temp.math;
+    }
+//    @Override
+//    public int compareTo(Student o) {
+//        if(this.getSum() > o.getSum()){
+//            return -1;
+//        }else if(this.getSum() < o.getSum()){
+//            return 1;
+//        }else {
+//            return this.getName().compareTo(o.getName());
+//        }
+//    }
+
+    // ========================== getter and setter ==========================
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getKor() {
+        return kor;
+    }
+
+    public void setKor(int kor) {
+        this.kor = kor;
+    }
+
+    public int getEng() {
+        return eng;
+    }
+
+    public void setEng(int eng) {
+        this.eng = eng;
+    }
+
+    public int getMath() {
+        return math;
+    }
+
+    public void setMath(int math) {
+        this.math = math;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+
+    public int getSum() {
+        return this.sum;
+    }
+
+    public float getAvg() {
+        return avg;
+    }
+
+    public void setAvg(float avg) {
+        this.avg = avg;
     }
 }
