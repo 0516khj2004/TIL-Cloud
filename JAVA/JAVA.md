@@ -53,12 +53,12 @@
 
 - 형 변환 
 
-  - 자동 타입  변환 
-    - byte < short < int < long < float < double
+  - 자동  형 변환 
+    - byte -> short, char-> int -> long ->float ->double
   - 강제 타입 변환 (casing)
-  - 명시적 타입 변환  
+  - 명시적 형 변환  
     - parseInt ();
-    - parseDouble ()
+    - parseDouble ();
 
 - 입력 
 
