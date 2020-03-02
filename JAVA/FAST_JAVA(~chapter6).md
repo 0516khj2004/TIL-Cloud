@@ -65,3 +65,136 @@
 - private
 - protected
 - default
+
+- this 
+  - 자신의 메모리를 가리킴
+  - 생성자에서 다른 생성자를 호출 함
+  - 인스턴스 자신의 주소를 반환
+
+
+
+### 8. static 변수
+
+- static 
+  - 처음 프로그램이 로드 될 때 데이터 영역에 생성 됨 
+  - 인스턴스의 생성과 상관없이 사용할 수 있으므로 클래스 이름으로 참조 
+  - 클래스변수, 정적 변수라고 함 
+  - static변수에서는 인스턴스 변수를 사용할 수 없음 
+  - 클래스이름으로 참조해서 사용하는 메서드
+
+| 변수유형             | 선언위치                                    | 사용범위                                                     | 메모리      | 생성과 소멸                                                  |
+| -------------------- | ------------------------------------------- | ------------------------------------------------------------ | ----------- | ------------------------------------------------------------ |
+| 지역변수(로컬)       | 함수 내부에 선언                            | 함수 내부에서만 사용                                         | 스택        | 함수가 호출될 때 생성되고 함수가 끝나면 소멸함               |
+| 멤버 변수(인스턴스 ) | 클래스 멤버 변수로 선언                     | 클래스 내부에서 사용하고 private가 아니면 참조 변수로 다른 클래스에서 사용 가능 | 힙          | 인스턴스가 생성될때 힙에 생성되고, 가비지 컬렉터가 메모리를 수거할때 소멸됨 |
+| static 변수(클래스)  | static 예약어를 사용하여 클래스 내부에 선언 | 클래스 내부에서 사용하고 private가 아니면 클래스 이름으로 다른 클래스에서 사용 가능 | 데이터 영역 | 프로그램이 처음 시작할 때 상수와 함께 데이터 영역에 생성되고 프로그램이 끝나고 메모리를 해제할 때 소멸됨 |
+
+- singleton Pattern - 단 하나만 존재하는 인스턴스 
+
+  - 생성자는 private으로 static으로 유일한 객체 생성
+  - 외부에서 유일한 객체를 참조할 수 있는 public static get()메서드 구현
+```java
+public class Company {
+    private static Company instance = new Company();
+    private Company(){}
+
+    public static Company getInstance(){
+        if(instance == null){
+            instance = new Company();
+        }
+        return  instance;
+    }
+}
+
+public class CompanyTest {
+    public static void main(String[] args) {
+        Company company = Company.getInstance();
+        Company company2 = Company.getInstance();
+
+        System.out.println(company);
+        System.out.println(company2);
+
+        Calendar calendar = Calendar.getInstance();
+    }
+}
+
+```
+
+### 9. 배열
+
+- 배열이란?
+
+  - 동일한 자료형의 순차적 자료 구조
+  - 물리적인 위치와 논리적인 위치가 같다
+  - 연속된 자료 구조 -> 중간에 비워두면 안된다. 
+  - int[] arr = new int[10];          ==       int arr[] = new int[10];
+
+- 객체 배열 
+
+  - null 값이 들어감 - 객체의 주소가 들어감
+
+  ```
+  Book[] library = new Book[5] 
+  for(int i=0; i<library.length; i++){
+  	System.out.println(librart[i])
+  }
+  // 출력 -> 5개의 주소값이 출력됨
+  ```
+
+- 배열 복사 
+
+  - System.arraycopy(arr1, 0, arr2, 1,3);
+
+    arr1배열의 0번째부터 복사해서 arr2배열의 1번째 자리부터 3길이만 복사
+
+  - 객체 복사 
+
+    - 얕은 복사
+
+      - ```
+        System.arraycopy(library,0,copyLibrary,0,5);
+        ```
+
+      - 두개의 배열이 같은 주소를 가진다
+
+      - 하나의 배열의 값을 바꾸면 다른 배열도 달라진다.
+
+    - 깊은 복사 
+
+      - ```
+        copyLibrary[0] = new Book();
+        copyLibrary[1] = new Book();
+        copyLibrary[2] = new Book();
+        copyLibrary[3] = new Book();
+        copyLibrary[4] = new Book();
+        
+        for(int i=0; i<library.length; i++){
+            copyLibrary[i].setAuthor(library[i].getAuthor());
+            copyLibrary[i].setTitle(library[i].getTitle());
+        }
+        ```
+
+      - 두개의 배열이 다른 주소를 가진다
+
+- 다차원 배열 (2차원 이상의 배열)
+
+  - int `[ ][ ]` arr = new int `[2][3]`
+  - arr.lengrh => 2       //행의 개수 
+  - arr[1] .length => 3
+  - 행의 기준으로 열을 돌린다
+
+### 10. ArrayList 
+
+- 자바에서 제공되는 객체 배열이 구현된 클래스 
+
+- 객체 배열을 사용하는데 필요한 여러 메서드들이구현되어 있음
+
+- | 메서즈              | 설명                                              |
+  | ------------------- | ------------------------------------------------- |
+  | boolean add(E e)    | 요소 하나를 배열에 추가, E는 요소의 자료형을 의미 |
+  | int size()          | 배열에 추가된 요소 전체 개수 반환                 |
+  | E get(int index)    | 배열의 index 위치에 있는 요소 값을 반환           |
+  | E remove(int index) | 배열의 index위치에 있는 요소 값을 제거하고, 반환  |
+  | boolean isEmpty()   | 배열이 비어있는지 확인                            |
+
+  
+
