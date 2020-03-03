@@ -1,6 +1,6 @@
-# Chapter 07~
+# Chapter 07~Chapter 10
 
-### 1. 상속(inheritance)
+### 1. 상속(inheritance) (실선)
 
 ```
 class B extends A {}
@@ -96,4 +96,114 @@ class B extends A {}
   - 변경될수 없는 값
   - final 메서드는 하위 클래스에서 재정의 할 수 없음
   - final 클래스는 더 이상 상속되는 않음 
+
+### 5. 인터페이스(점선)
+
+> 클라이언트 프로그램(서비스를 받는 쪽) 에 어떤 메서드를 제공하는지 알려주는  명제 
+
+- 인터페이스 요소
+
+  - 추상메서드
+
+    모든 메서드가 추상 메서드
+
+  - 상수 (static final)
+
+    선언되 모든 변수는 상수로 처리 됨
+
+  - 디폴트 메서드
+
+    기본 구현을 가지는 메서드 - 구현하는 클래스는 재정의 할 수 있음
+
+  - 정적 메서드
+
+    인스턴스 생성과 상관없이 인터페이스 타입으로 호출하는 메서드
+
+    ```
+    static int total(int a)
+    ```
+
+    
+
+  - private 메서드
+
+    인터페이스 내에서 사용하기 위해 구현한 메서드- 구현하는 클래스에서 재정의 할 수 없음
+
+- 인터페이스 선언 (점선)
+
+  - public **interface** Calc
+  - 인터페이스는 구현 코드가 없기 때문에 타입 상속이라고도 함 
+
+- 인터페이스를 활용한 다형성 구현 
+
+  - 하나의 클래스가 여러 인터페이스를 **구현** 할 수 있음
+
+  ```
+  public class Customer implements Buy, Sell {}
+  ```
+
+  - 인터페이스간에도 **상속**이 가능함 - extends 뒤에 여러 인터페이스를 상속 받을 수 있음
+
+  ```
+  public interface MyInterface extends X,Y{}
+  ```
+
+  ​    X,Y라는 인터페이스를 상속받아서 MyInterface하는 인터페이스를 만든다
+
+  - 인터페이스 구현과 클래스 상속 함께 사용
+
+  ```
+  public class BookShelf extends Shelf implements Queue {}
+  ```
+
+### 6. Object 클래스
+
+- 모든 클래스의 최상위 클래스
+
+- **java.lang.Object** 클래스 
+
+- 모든 클래스는 Object 클래스의 일부 메서드를 재정의하여 사용할 수 있음 - 오버라이딩
+
+  - toStirng() -  객체의 정보를 String으로 바꾸어 사용할 때 유용함
+
+    ```java
+    @Override
+    public String toString() {
+       return  author +"," +title;
+    }
+    ```
+
+  - equals() - 두 객체의 동일함을 논리적으로 재정의 할 수 있음 / 물리적으로 다른 메모리에 위치한 객체라도 논리적으로 동일함을 구현하기 위해 사용하는 메서드
+
+    ```java
+    @Override
+    public boolean equals(Object obj) {
+        if( obj instanceof Student){
+            Student std = (Student)obj;
+            if (this.studentNum == studentNum)
+                return true;
+            else 
+            	return false;
+        }
+        return false;
+    }
+    ```
+
+    
+
+    - ==    -  두 객체의 주소가 동일한지 묻는 것
+    - equals   -  두객체의 값이 동일한지 묻는 것
+
+  - hashCode() - 인스턴스가 저장된 가상머신의 주소(10진수)
+
+  - System.identityHashCode() - 실제 해시코드 -주소 값
+
+  - clone() - 객체의 복사본 / 기본 틀(prototype)으로 부터 같은 속성 값을 가진 객체의 복사본을 생성 할 수 있음  / 복제할 객체는 cloneable 인터페이스를 명시해야함 
+
+    ```
+    class Book implements Cloneable{} 
+    // 복재할 객체는 상속해야한다.
+    ```
+
+  - finalize() - 리소스의 해제, 소켓 닫기 , 
 
