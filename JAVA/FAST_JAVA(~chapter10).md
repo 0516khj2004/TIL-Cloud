@@ -1,4 +1,4 @@
-# Chapter 07~Chapter 11
+# Chapter 07~Chapter 12
 
 ### 1. 상속(inheritance) (실선)
 
@@ -350,11 +350,122 @@ class B extends A {}
   - First In First Out(FIFO) - 먼저 저장된 자료가 먼저 꺼내지는 자료구조 
   - enqueue - 추가  dequeue - 삭제
 
-### 
+### 12. 내부클래스 
 
+- 내부 클래스 
 
+  - 클래스 내부에 구현한 클래스(중첩된 클래스)
+  - 지역변수는 변경할 수 없다(final)
 
+- 내부 클래스 유형
 
+  | 종류                 | 구현위치                                      | 사용할 수 있는 외부클래스변수     | 생성 방법                                                    |
+  | -------------------- | --------------------------------------------- | --------------------------------- | ------------------------------------------------------------ |
+  | 인스턴스 내부 클래스 | 외부 클래스 멤버변수와 동일                   | 외부 인스턴스 변수, 외부 전역변수 | 외부 클래스를 먼저 만든 후 내부 클래스 생성                  |
+  | 정적 내부 클래스     | 외부클래스 멤버변수와 동일                    | 외부 전역 변수                    | 외부 클래스와 무관하게 생성                                  |
+  | 지역내부 클래스      | 메서드 내부에 구현                            | 외부 인스턴스변수,외부 전역 변수  | 메서드를 호출할 때 생성                                      |
+  | 익명 내부 클래스     | 메서드 내부에 구현, 변수에 대입하여 직접 구현 | 외부인스턴스변수, 외부 전역 변수  | 메서드를 호출할 때 생성되거나, 인터페이스 타입 변수에 대입할 때 new예약어를 사용하여 생성 |
+
+### 13. 람다식
+
+- 람다식
+
+  - 자바에서 함수형 프로그래밍을 구현하는 방식
+
+  - 클래스를 생성하지 않고 함수의 호출만으로 기능을 수행
+
+  - 함수형 인터페이스를 선언함 
+
+  - 병렬
+
+  - 함수를 변수처럼 사용
+
+  - ```
+    MyMaxNumber max = (x , y) -> (x >=y) ?x :y ;
+    ```
+
+- 함수형 프로그래밍 
+
+  - 순수 함수를 구현하고 호출
+  - 매개 변수만을 사용하도록 만든 함수로 외부 자료에 부수적인 영향이 발생하지 않도록 함
+  - 입력 받은 자료를 기반으로 수행되고 외부에 영향을 미치지 않으므로 병렬처리들에 가능 안정적인 확장성 있는 프로그래밍 방식 
+
+- 예시
+
+  ```
+  interface  PrintString{
+      void showString(String str);
+  }
+  public class TestLamda {
+      public static void main(String[] args) {
+          PrintString lamdastr = s-> System.out.println(s);
+  
+          lamdastr.showString("Test");
+  
+          showMyString(lamdastr);
+  
+          PrintString test = returnString();
+          test.showString("test3");
+      }
+      public static void showMyString(PrintString p){
+          p.showString("TEST2");
+      }
+      public static PrintString returnString(){
+          return s->System.out.println(s + "!!!");
+      }
+  }
+  ```
+
+### 14. 스트림
+
+> 자료의 대상과 관계없이 동일한 연산을 수행할 수 있는 기능 ( 자료의 추상화)
+
+- 배열, 컬렉션에 동일한 연산이 수행되어 일관성 있는 처리 가능 
+
+- 스트림 재사용 x
+
+- 중간 연산과 최종 연산으로 구분 됨 -> 최종연산이 수행되어야 모든 연산을 볼 수 있음
+
+- 중간 연산 
+
+  - filter() 
+  - map()
+
+- 최종연산
+
+  - forEach() - 요소를 하나씩 꺼내 옴
+
+  - count() - 요소의 개수
+
+  - sum - 요소의 합 
+
+  - reduce() - 정의된 연산이 아닌 프로그래머가 직접 지정하는 연산을 적용
+
+    ```
+    System.out.println(Arrays.stream(arr).reduce(0,(a,b)->a+b));
+    ```
+
+- 예시
+
+  - 고객 명단 출력 (이름만)
+
+  ```
+  customerList.stream().map(c -> c.getName()).forEach(s -> System.out.println(s));
+  ```
+
+  - 여행 총 비용 구하기
+
+  ```
+  int total = customerList.stream().mapToInt(c -> c.getPrice()).sum();
+  ```
+
+  - 고객님중 20살 이상만 이름 출력하기 
+
+  ```
+  customerList.stream().filter(c -> c.getAge() => 20).map(c -> c.getName()).forEach(s -> System.out.printIn(s))
+  ```
+
+  
 
 
 
