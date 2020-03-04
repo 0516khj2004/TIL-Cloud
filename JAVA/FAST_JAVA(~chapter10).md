@@ -1,4 +1,4 @@
-# Chapter 07~Chapter 10
+# Chapter 07~Chapter 11
 
 ### 1. 상속(inheritance) (실선)
 
@@ -206,4 +206,78 @@ class B extends A {}
     ```
 
   - finalize() - 리소스의 해제, 소켓 닫기 , 
+
+### 7. String()
+
+- 선언하기 
+  - String str1 = new String("ABC"); => 인스턴스로 생성 / 힙 메모리
+  - String str2 = "abc"; => 상수풀에 있는 문자열을 가리킴  
+  - String str3 = "abc"; => str2 == str3  true
+- 문자열 연결하는 법 
+  - concat() or +
+    - 새로운 문자열이 생성 되는 것 
+    - 문자열을 붙일 때
+    - 주소값이 다르다
+  - StringBuilder - 주소값이 같다
+    - 단일 쓰레드 프로그래밍에서 용이
+  - StirngBuffer - 주소값이 같다
+    - 가변적인 char[] 배열을 멤버변수라 가지고 있는 클래스
+    - toString()메서드로 String 반환
+    - StringBuffer는 멀티 쓰레드 프로그래밍에서 동기화가 보장됨 
+
+### 8. Wrapper 클래스
+
+| 기본형  | Wrapper 클래스 |
+| ------- | -------------- |
+| boolean | Boolean        |
+| byte    | Byte           |
+| char    | Character      |
+| short   | Short          |
+| int     | Integer        |
+| long    | Long           |
+| float   | Float          |
+| double  | Double         |
+
+### 9. 재네릭 프로그래밍
+
+> 변수의 선언이나 메서드의 매개변수를 하나의 참조 자료형이 아닌 여러 자료형을 변환 될 수 있도록 프로그래밍하는 방식
+>
+> 실제 사용되는 참조 자료형으로의 변환은 컴파일러가 검증하므로 안정적은 프로그래밍 방식
+
+- public class Gene<T>{ } -> T 자료형 매개변수 
+- <T extends M> M을 상속받아서 사용
+
+### 10. 컬렉션 프레임 워크
+
+- 컬렉션 프레임 워크
+
+  - 프로그램 구현에 필요한 자료구조와 알고리즘을 구현해 놓은 라이브러리 
+  - java.util 패키지에 있음
+
+- Collection 인터페이스 
+
+  - List
+    - 순서가 있는 자료 관리, 중복 허용
+    - 배열의 기능을 구현하기 위한 메서드가 선언됨
+    - ArrayList
+    - Vector
+      - **멀티 쓰레드** 프로그램에서 **동기화** 지원 
+    - LinkedList
+  - Set
+    - 순서가 정해져 있지 않음, 중복 허용하지 않음
+    - HashSet
+    - TreeSet
+
+- Map 인터페이스 
+
+  - 쌍으로 이루어진 객체를 관리하는데 필요한 여러 메서드가 선언되어 있음
+  - Key-value 쌍으로 되어 있고 ket는 중복될 수 없음
+  - Hashtable
+    - Properties
+  - HashMap
+  - TreeMap
+
+  
+
+
 
