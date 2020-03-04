@@ -257,27 +257,104 @@ class B extends A {}
 - Collection 인터페이스 
 
   - List
+
     - 순서가 있는 자료 관리, 중복 허용
     - 배열의 기능을 구현하기 위한 메서드가 선언됨
     - ArrayList
     - Vector
       - **멀티 쓰레드** 프로그램에서 **동기화** 지원 
     - LinkedList
+
   - Set
+
     - 순서가 정해져 있지 않음, 중복 허용하지 않음
+
+    - interator() 메서드 호출  - 순회
+
+      ```java
+      Iterator<String> ir = set.iterator();
+      while (ir.hasNext()){
+          String str = ir.next();
+          System.out.println(str);
+      }
+      // 결과는 순선대로 나오고 / 중복은 허락 하지 않음!
+      ```
+
     - HashSet
-    - TreeSet
+
+      ```java
+      HashSet<String> set = new HashSet<String>();
+      ```
+
+    - TreeSet  
+
+      -  객체의 정렬에 사용되는 클래스 
+      - 중복을 허용하지 않으며 오름차순이나 내림차순으로 객체를 정렬 함 
+      - 내부적으로 이진 검색 트리로 구현되어 있음 
+      - 객체 비교를 위해 Comparable이나 Comparator 인터페이스를 구현 해야 함 
+      - implements Comparable<Member> 
+      - implements Comparator<Member> {}
+        - TreeSEt<Member> treeSet = new TreeSet<Member>(new Member());
 
 - Map 인터페이스 
 
-  - 쌍으로 이루어진 객체를 관리하는데 필요한 여러 메서드가 선언되어 있음
-  - Key-value 쌍으로 되어 있고 ket는 중복될 수 없음
-  - Hashtable
-    - Properties
-  - HashMap
-  - TreeMap
+  - **쌍**으로 이루어진 객체를 관리하는데 필요한 여러 메서드가 선언되어 있음
 
+  - Key-value 쌍으로 되어 있고 **key는 중복될 수 없음(키는 유일)**
+
+  - Hashtable
+
+    - Properties
+
+  - HashMap 
+
+  - TreeMap -
+
+    - key로 정렬 
+
+      - ```
+        hashMap.keySet().iterator();
+        hashMap.values().iterator();
+        ```
+
+    - Comparable이나 Comparator 인터페이스를 구현 해야 함 
+
+### 11. Stack 과 Queue
+
+- stack
+
+  - Last In First Out(LIFO) - 맨마지막에 추가 된 요소가 가장 먼저 꺼내지는 자료구조 
+  - push() - 추가  pop() - 삭제
+
+  ```java
+  class MyStack{
+      private ArrayList<String> arrayStack = new ArrayList<String>();
   
+      public void push(String data){
+          arrayStack.add(data);
+      }
+      public String pop(){
+          int len = arrayStack.size();
+          if(len == 0){
+              System.out.println("스택이 비었습니다");
+              return null;
+          }
+          return arrayStack.remove(len-1);
+      }
+      
+  }
+  ```
+
+- Queue 
+
+  - First In First Out(FIFO) - 먼저 저장된 자료가 먼저 꺼내지는 자료구조 
+  - enqueue - 추가  dequeue - 삭제
+
+### 
+
+
+
+
 
 
 
