@@ -28,7 +28,7 @@
 
 - IDFormatException
 
-  ```
+  ```java
   public class IDFormatException extends Exception {
       public  IDFormatException(String message){
           super(message);
@@ -38,7 +38,7 @@
 
 - IDFormatTest
 
-  ```
+  ```java
   public class IDFormatTest {
       private  String userID;
   
@@ -55,7 +55,6 @@
           }
           this.userID = userID;
       }
-  
       public static void main(String[] args) {
           IDFormatTest idtest = new IDFormatTest();
   
@@ -71,10 +70,38 @@
           } catch (IDFormatException e) {
               System.out.println(e);
           }
-  
-  
       }
   }
   ```
 
+### 3. 자바 입출력 스트림
+
+- 입출력 스트림 
+  - 다양한 입출력 장치에 독립적으로 일관성 있는 입출력 방식 제공
+  - 입출력이 구현되는 곳에서 모두 I/O 스트림을 사용
+- 입출력 스트림 구분
+  -  I/O 대상 기준 :  입력 스트림, 출력 스트림
+    - 입력 스트림 -  대상으로부터 자료를 읽어 들이는 스트림
+      - FileInputStream, FileReader, BufferedInputStream, BufferedReader
+    - 출력 스트림 - 대상으로 자료를 출력하는 스트림 
+      - FileOutputStream, FileWriter, BufferedInputStream, BufferedWriter
+  - 자료의 종류 : 바이트 스트림, 문자 스트림
+    - 바이트 스트림  - 바이트 단위로 자료를 읽고 씀(동영상, 음악 파일)
+      - FileInputStream, FileOutputStream, BufferedInputStream, BufferedOutputStream
+    - 문자 스트림 - 문자는 2바이트씩 처리함 
+      - FileReader, FileWriter, BufferedReader, BufferedWriter
+  - 스트림의 종류 : 기반 스트림 , 보조 스트림 
+    - 기반 스트림 - 대상에 직접 자료를 읽고 쓰는 기능의 스트림
+      - FileInputStream, FileOutputStream ,FileWriter
+    - 보조 스트림 - 직접 읽고 쓰는 기능은 없고 추가적인 기능을 제공해 주는 스트림, 기반 스트림이나 또 다른 보조 스트림을 생성자의 매개변수를 포함함 
+      - InputStreamReader, OutputStreamWriter, BufferedInputStream,  BufferedOutputStream
+- 표준 입출력 - System 클래스의 표준 입출력 멤버
+  - PrintStream out; - 표준 출력 스트림
+  - InputStream in; - 표준 입력 스트림
+  - PrintStream err; - 표준 에러 스트림 
+- Scanner 클래스 
+  - 문자뿐 아니라 정수, 실수 등 다양한 자료형을 읽을 수 있음
+  - 생성자가 다양하여 여러 소스로 부터 자료를 읽을 수  있음
+- Console 클래스 
+  - console cmd 창에서 사용함
 
