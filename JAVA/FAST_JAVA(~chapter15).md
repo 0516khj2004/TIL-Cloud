@@ -1,4 +1,4 @@
-# Chapter 13~Chapter 
+# Chapter 13 ~ Chapter 15
 
 ### 1. 예외와 예외처리
 
@@ -154,11 +154,172 @@
 - 직렬화
 
   - implements Serializable => 직렬화하겠다는 의도를 표시 
-  
   - transient => 직렬화하지 않겠다는 의도 표시 
-  
   - implements Externalizable => 직접 구현할수 있다
+
+### 5. 그 외 입출력 클래스와 데코레이터 패턴
+
+- File 클래스
+  - 파일 개념을 추상화한 클래스 
+  - 입출력 기능은 없고 파일의 속성, 경로, 이름 등을 알 수 있음
+- RandomAccessFile 클래스
+  - 입출력 클래스 중 유일하게 파일 입출력을 동시에 할 수 있는 클래스 
+  - 파일 포인터가 있어서 읽고 쓰는 위치의 이동이 가능함
+  - 다양한 자료형에 대한 메소드 제공 
+- 데코레이터 패턴
+  - 자바의 입출력 스트림은 데코레이터 패턴을 사용
+  - 실제 입출력 기능을 가진 객체와 그 외 다양한 기능을 제공하는 데코레이터을 사용하여 다양한 입출력 기능을 구현
+  - 상속보다 유연한 확장성을 가짐
+  - 지속적인 서비스의 증가와 제거가 용이함 
+
+### 6. Thread
+
+- Process
+
+  - 실행중인 프로그램
+  - OS로부터 메모리를 할당 받음
+
+- Thread
+
+  - 실제 프로그램이 수행되는 작업의 최소 단위
+  - 하나의 프로세스는 하나 이상의 Thread를 가지게 된다 
+
+- Thread 구현하기 
+
+  - extends Thread => 하나받게 상속받지 못함
+
+    ```java
+    class MyThread extends Thread{
+        public void run(){
+            int i;
+            for (i=0; i<=200 ;i++ ){
+                System.out.print(i +"\t");
     
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    public class ThreadTest {
+        public static void main(String[] args) {
+    
+            System.out.println("start");
+            MyThread th1 =new MyThread();
+            MyThread th2 =new MyThread();
+    
+            th1.start();
+            th2.start();
+    
+            System.out.println("end");
+    
+        }
+    }
+    ```
 
+    Thread class에 sleep()가 있어서 바로 사용 가능 
 
+  - implements Runnable => Runnable인터페이스 구현
+
+    이미 다른 클래스를 상속받는 경우 Thread는 상속받지 못하기 때문에 Runnable을 구현해야한다.
+
+    ```
+    class MyThread implements Runnable{
+        public void run(){
+            int i;
+            for (i=0; i<=200 ;i++ ){
+                System.out.print(i +"\t");
+    
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    public class ThreadTest {
+        public static void main(String[] args) {
+    
+            System.out.println("start");
+            MyThread  runner1 =new MyThread();
+            MyThread runner2 =new MyThread();
+    
+           Thread th1 = new Thread(runner1);
+           Thread th2 = new Thread(runner2);
+    
+           th1.start();
+           th2.start();
+    
+            System.out.println("end");
+    
+        }
+    }
+    ```
+
+- 메서드의 활용
+
+  - ![](C:\Users\0516k\TIL\images\thread.PNG)
+  - join() 메서드
+    - 다른 thread의 결과를 보고 진행해야 하는 일이 있는 경우 join()메서드를 활용 
+    - join메서드를 호출한 thread가 non-runnable 상태가 되어야 함 
+  - interrupt() 메서드
+    - 다른 thread에 예외를 발생시키는 interrupt를 보냄
+    - thread가 join(), sleep(), wait() 메서드에 의해 블럭킹 되었다면 interrupt에 의해 다시 runnable 상태가 될 수 있음 
+
+### 7. Multi-Thread 
+
+- 동시에 여러개의 thread가 수행되는 프로그래밍
+
+- thread는 각각의 작업공간(context)를 가짐
+
+- critical section에 대한 동기화의 구현이 필요 -순서가 필요
+
+- 임계영역(critical section)
+
+  - 두개 이상의 thread가 동시에 접근하게 되는 리소스
+  - critical section에 동시에 thread가 접근하게 되면 실행결과 보장 안됨
+  - thread간의 순서를 맞추는 동기화 가 필요
+
+- 동기화(synchronization)
+
+  - 임계영역에 여러 thread가 접근 하는 경우 한 thead가 수행 하는 공안 공유 자원을 lock하려 다른 thread의 접근 막음
+
+  - 동기화를 잘못 구현하면 deadlock에 빠질수 있음'
+
+  - 동기화 구현
+
+    - synchronization 수행문
+
+      - ```
+        synchronized(this)
+        ```
+
+    - synchronization 메서드
+
+      - ```
+        public synchronized void saveMoney(this save)
+        ```
+
+- wait()
+
+  - 리소스가 더 이상 유효하지 않은 경우 리소스가 사용 가능할 때까지 위해 thread를 non-runnable상태로 전환
+  - wait() 상태가 된 thread은 notify()가 호출 될 때까지 기다린다.
+
+- notify() 
+
+  - wait() 하고 있는 thread 중 한 thread를 runnable한 상태로 깨움
+  - 하지만 랜덤으로 깨움
+  - if 문 사용
+
+- notifyAll()
+
+  - wait() 하고 있는 모든 thread가 runnable한 상태가 되도록 함 
+  - notify() 보다 notifyAll()을 사용하기를 권장
+  - 튿정 thread가 통지를 받도록 제어 할 수 없으므로 모두 깨운 후 scheduler에 cpu를 점유하는 것이 좀 더 공평함 
+  - while 문 사용
 
