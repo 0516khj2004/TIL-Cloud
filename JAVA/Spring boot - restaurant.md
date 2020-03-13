@@ -32,6 +32,20 @@
       MockitoAnnotations.initMocks(this);
       ```
 
+- JPA - java persistence  API
+
+  - persistence  - 영속화 
+  - Hibernate -
+  - @Entity
+  - Spring Data JPA 사용 
+  - H2 - in memory
+
+- front-end
+
+  - Webpack
+  - CORS - Cross-Origin Resource Sharing
+    - @CrossOrigin
+
 ## # 레이아웃
 
 - UI Layout
