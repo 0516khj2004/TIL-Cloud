@@ -13,6 +13,25 @@
   - @Component
   - @Autowired
 
+- Mock Object 
+
+  - Mockito
+
+  - @MockBean
+
+    - ```java
+      List<Restaurant> restaurants = new ArrayList<>();
+      restaurants.add(new Restaurant(1004L, "Bob zip","Seoul"));
+      
+      given(restaurantService.getRestaurants()).willReturn(restaurants);
+      ```
+
+  - @Mock 
+
+    - ```java
+      MockitoAnnotations.initMocks(this);
+      ```
+
 ## # 레이아웃
 
 - UI Layout
@@ -30,6 +49,8 @@
 
 - 가게 목록  -  GET/restaurants
 
+  - Http Status 200
+
   - ```java
     @GetMapping("/restaurants")
     public  List<Restaurant> list(){
@@ -40,6 +61,8 @@
 
 - 가게 상세 - GET/restaurants/{id}
 
+  - Http Status 200
+
   - ```java
     @GetMapping("/restaurants/{id}")
     public Restaurant detail(@PathVariable("id") Long id){
@@ -49,3 +72,6 @@
     }
     ```
 
+- 가게추가 - Post/restaurants 
+
+  - Http Status 201(Created)
