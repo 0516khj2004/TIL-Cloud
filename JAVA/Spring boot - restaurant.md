@@ -54,6 +54,17 @@
   - @NoArgsConstructor  
     - 기본생성자를 쓰지 않을 때
 
+- Validation - 사용자가 입력을 잘 못 했을 때
+
+  - @Valid -- HTTP Satus400(Bad request)
+    - @NotNull
+    - @NotEmpty
+    - @Size(max =10)
+
+- Not Found - HTTP Satus404(Not found)
+
+  - @ControllerAdvice
+
 ## # 레이아웃
 
 - UI Layout
