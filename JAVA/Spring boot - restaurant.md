@@ -129,26 +129,23 @@
 ## #메뉴 관리
 
 - Bulk Update 
-
   - 한꺼번에 처리하는 방법 
-
 - 메뉴 추가 -  PATCH/restaurants/{id}/menuitems
-
   - Http Status 200
   - 메뉴 전체 추가 
   - save 
   -  deleteById 
   - id 입력하지 않음 
-
 - 메뉴 삭제 
-
   - id: 2
   - "destroy": true -> 메뉴를 삭제하겠다는 의미  
   - @Transient - db에 넣지 않을 때
-
 - 메뉴 변경
-
   - id : 2 
   - 같은 아이디 입력
 
-  
+## # 고개 평가
+
+- 고객 리뷰 등록
+  - Post/restaurants /{id}/reviews
+
