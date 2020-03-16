@@ -46,6 +46,14 @@
   - CORS - Cross-Origin Resource Sharing
     - @CrossOrigin
 
+- Lombok
+
+  - @Setter
+  - @Getter
+  - @Builder
+  - @NoArgsConstructor  
+    - 기본생성자를 쓰지 않을 때
+
 ## # 레이아웃
 
 - UI Layout
@@ -89,3 +97,20 @@
 - 가게추가 - Post/restaurants 
 
   - Http Status 201(Created)
+
+- 가게 수정 - PATCH/restaurants/{id}
+
+  - Http Status 200
+
+  - @Transactional - > 자동으로 db에 업데이트 됨
+
+    addRestaurant의 save(restaurant)이랑 같은 기능
+
+    ```java
+    @Transactional
+    public Restaurant updateRestaurant(long id, String name, String address) {
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        restaurant.updateInformation(name, address);
+        return restaurant;
+    }
+    ```
