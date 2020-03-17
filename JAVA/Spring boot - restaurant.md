@@ -64,6 +64,11 @@
 - Not Found - HTTP Satus404(Not found)
 
   - @ControllerAdvice
+  
+- ./gradlew build   => 한번에 돌리기 위해서 (3개의 api)
+
+  - jar { enabled = true }
+  - bootJar { enabled = false }
 
 ## # 레이아웃
 
@@ -148,4 +153,13 @@
 
 - 고객 리뷰 등록
   - Post/restaurants /{id}/reviews
+
+## # 프로젝트 분리
+
+- common
+  - 공통적인 부분
+- admin-api
+  - 관리자 api
+- customer-api
+  - 고객 api
 
