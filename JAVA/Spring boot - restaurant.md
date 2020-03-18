@@ -163,3 +163,28 @@
 - customer-api
   - 고객 api
 
+## #진짜 영속화(db영구저장)
+
+- h2 db 
+  - momory -> file 로 변경에서 저장되게 함  
+  - Profiles -> 테스트할때, 저장할때, 진짜로 사용할때 
+- h2 -console 
+  - localhost:8080/h2-console
+
+## #가게목록 필터링
+
+- 지역(Region)  - 35~37
+  - address
+    - findAllByAddressContaining - address에 포함된 문자열 
+      - findeAllAddressStartingWith - address에 시작하는 문자열 
+  - admin-api 
+    - GET/ regions
+    - POST/regions
+  - customer-api
+    - GET /regions
+- 분류 (Category) 38~40
+  - admin-api 
+    - GET/ categorys
+    - POST/categorys
+  - customer-api
+    - GET /categorys
