@@ -188,3 +188,19 @@
     - POST/categorys
   - customer-api &category=3
     - GET /categorys
+
+## # 사용자 관리 
+
+- User
+  - email - 고유번호
+  - name
+  - level - role
+    - 1 - coustomer
+    - 2 - restaurant owner 
+    - 3 - admin
+- admin-api
+  - User list
+  - User create - 회원가입
+  - User update
+  - User delete(deactivate()) 
+    -  - level이 0이 되어서 아무것도 할 수 없는 상태가 됨 
