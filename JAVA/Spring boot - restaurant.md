@@ -186,5 +186,5 @@
   - admin-api 
     - GET/ categorys
     - POST/categorys
-  - customer-api
+  - customer-api &category=3
     - GET /categorys
