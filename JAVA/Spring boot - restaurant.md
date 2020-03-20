@@ -189,7 +189,7 @@
   - customer-api &category=3
     - GET /categorys
 
-## # 사용자 관리 
+## # 사용자 관리 - admin-api (User)
 
 - User
   - email - 고유번호
@@ -203,4 +203,26 @@
   - User create - 회원가입
   - User update
   - User delete(deactivate()) 
-    -  - level이 0이 되어서 아무것도 할 수 없는 상태가 됨 
+    -  level이 0이 되어서 아무것도 할 수 없는 상태가 됨 
+
+## # 회원가입 - customer-api(User)
+
+- Password
+
+  - Hashing -> Spring Security-> (HttpSecurity)
+
+    - ```
+      implementation 'org.springframework.boot:spring-boot-starter-security'
+      ```
+
+    - SecurityJavaConfig.clss 
+
+      - 만들어서  security로 부터 만들어진 로그인from등을 disable한다 
+
+    - BCrypt
+
+-  coustomer-api
+
+  - e-mail
+  - Name
+  - Password 
