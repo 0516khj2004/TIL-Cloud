@@ -232,3 +232,32 @@
 - Authentication
 - Post / session
   - access Tocken
+
+## # JWT(JSON WEB Token)
+
+- 3Part
+  - Header.
+    - 어떤 타입
+    - 어떤 알고리즘
+  - Payload. 
+    - 어떤 데이타 (암호화X)
+  - Singnature.
+    - Claims (많은 데이터를 담는 것은 좋지 않다)
+      - 사용자 id, 사용자 name 등,,, 
+    - JMAC-SHA256 (서명 데이타)
+- Base64 URL Encoding
+
+## # 인가(Autherization)
+
+- Stateless 
+- Heater을 통해서 
+  - Authorization: Bearer
+- Filter(BasicAuthorizationFilter)
+  - 모든 요청에 대해서 토큰이 세팅됨 
+- AuthorizationTocker
+  - spring내부에서만 사용된 
+
+## #로그인 Api(Stateless 상태를 가지고 있지 않은 데이터)
+
+- eatgo-login-api
+  - User reataurantId
