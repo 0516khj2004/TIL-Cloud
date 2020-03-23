@@ -276,3 +276,18 @@
   - GET/reservations
 - eatgo-customer-api
 - eatgo-admin-api
+
+## # Multi API Server
+
+- container(Docker Compose)
+  - front end
+  - mysql 
+- docker-compose.yml
+  - env_file - .env
+  - volumes - ./data/mariadb
+  - healthcheck
+- docker 실행
+  - ./gradlew bootJar
+  - docker-compose up
+  - docker-compose ps
+  - 
