@@ -261,3 +261,18 @@
 
 - eatgo-login-api
   - User reataurantId
+
+## # 테이블 예약(Reservation)
+
+- Reservation
+  - uerId
+  - name
+  - dare
+  - time
+  - partySize
+- 예약 하기
+  - POST/reservations
+- 예약보기
+  - GET/reservations
+- eatgo-customer-api
+- eatgo-admin-api
