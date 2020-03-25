@@ -35,3 +35,48 @@
               .andExpect(MockMvcResultMatchers.content().string("helloWorld"));
   }
   ```
+
+### 2. JPA
+
+- 기본 db 쿼리를 사용하는 거 대신에 자바를 활용해서 사용 한 것
+
+- Repository 생성
+
+  - `public interface PersonRepository extends JpaRepository<Person, Long> {}`
+
+- Lombok
+
+  - @Getter
+
+  - @Setter
+
+  - @ToString
+
+    - toString을 오버라이드 하지 않아도 된다.
+
+    - ```
+      @ToString(exclude = "phoneNumber")
+      ---------------------------------------
+      @ToString.Exclude
+      private String phoneNumber;
+      
+      -> phoneNumber가 보안상 보이지 않아야할때 tostring에서 제외한다.
+      ```
+
+  - @Constructor
+
+    - `@NoArgsConstructor` 인자가 없는 constructor
+    - `@AllArgsConstructor` 모든 인자가 있는  constructor
+    - `@RequiredArgsConstructor` 꼭 필요한 인자만 포함하는 constructor
+
+  - @EqualsAndHashCode
+
+  - @Data
+
+    - ```
+      @Getter
+      @Setter
+      @RequiredArgsConstructor
+      @ToString
+      @EqualsAndHashCode
+      ```
