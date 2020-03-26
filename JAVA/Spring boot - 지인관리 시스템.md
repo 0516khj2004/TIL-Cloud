@@ -80,3 +80,32 @@
       @ToString
       @EqualsAndHashCode
       ```
+
+- Relation
+
+  - domain -> Block 
+
+    - 걸러져야하는 객체를 위한 class
+
+  - @OneToOne
+
+    - ```
+      @OneToOne
+      private Block block;
+      ```
+
+    - CascadeType - person class 에서 Block class의 영속성을 같이 관리 함 
+
+    - ```
+      @OneToOne(cascade = CascadeType.PERSIST)
+      private Block block;
+      
+      @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+      
+      @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+      -> 정말로 삭제까지 됨 /orphanRemoval = true 을 하지않으면 block을 삭제해도 그대로 남아있음 
+      ```
+
+    - FetchType
+
+    - optional, orphanRemoval
