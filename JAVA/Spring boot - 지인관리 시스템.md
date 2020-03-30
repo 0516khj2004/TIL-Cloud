@@ -109,3 +109,13 @@
     - FetchType
 
     - optional, orphanRemoval
+
+  - Query Method
+
+    - @Embedded 
+    - @Embeddable
+    - @Valid
+    - @Query
+
+  - Data.sql  - test에서 값을 넣지 않고 자동화 하기 위해서 
+
