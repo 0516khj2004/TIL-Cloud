@@ -119,3 +119,84 @@
 
   - Data.sql  - test에서 값을 넣지 않고 자동화 하기 위해서 
 
+### 3. Controller
+
+- person 정보를 조회하는 api 생성
+
+  - @Slf4j - 로그 
+
+    - log.info("person  -> {} " , personRepository.findAll());
+
+  - @GetMapping
+
+    - @PathVariable
+
+    - ```
+      @GetMapping("/{id}")
+          public Person getPerson(@PathVariable Long id){
+              return personService.getPerson(id);
+      }
+      ```
+
+- person정보를 추가하는 api생성
+
+  - @PostMapping
+
+    - @ResponseStatus(HttpStatus.CREATED) - 성공 201
+
+    - ```
+      @PostMapping
+      @ResponseStatus(HttpStatus.CREATED)
+      public void postPerson(@RequestBody Person person){
+          personService.put(person);
+      
+          log.info("person  -> {} " , personRepository.findAll());
+      }
+      ```
+
+- person 정보를 수정하는 api생성
+
+  - @PutMapping - 전체 업데이트
+
+    - ```
+      @PutMapping("/{id}")
+      public void modifyPerson(@PathVariable Long id , @RequestBody PersonDto personDto){
+          personService.modify(id, personDto);
+      
+          log.info("person -> {}", personRepository.findAll());
+      }
+      ```
+
+  - @PatchMapping - 일부만 업데이트
+
+    - ```
+      @PatchMapping("/{id}")
+      public void modifyPerson(@PathVariable Long id , String name){
+          personService.modify(id, name);
+      
+          log.info("person -> {}", personRepository.findAll());
+      }
+      ```
+
+- person정보를 삭제하는 api생성
+
+  - `@BeforeEach` -> 해당 test에서 class마다 매번 먼저 실행한다
+
+  - @DeleteMapping
+
+    - ```
+      @DeleteMapping("/{id}")
+      public void deletePerson(@PathVariable Long id){
+          personService.delete(id);
+      
+          log.info("person -> {}", personRepository.findAll());
+          log.info("people deleted : {}", personRepository.findPeopleDeleted());
+      }
+      ```
+
+  - @Where : JPA (Person domain)
+
+    - ```
+      @Where(clause = "deleted = false")
+      ```
+
