@@ -200,3 +200,16 @@
       @Where(clause = "deleted = false")
       ```
 
+### 4. Refactoring
+
+- person에서 age필드 지우고 birthday랑 연결해서 사용하기
+- persond에서  bloodType필드 지우기 
+
+
+
+### 
+
+
+
+
+
