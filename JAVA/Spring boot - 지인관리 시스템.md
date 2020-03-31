@@ -207,9 +207,23 @@
 
 
 
-### 
+### 5. Controller Test
 
+- deletePerson()
 
+  - ```
+    assertTrue(personRepository.findPeopleDeleted().stream().anyMatch(
+            person -> person.getId().equals(1L));
+    ```
 
+- modifyPerson()
 
+  - asserAll -> 확인여부를 전체로 알려준다.
+
+- getPerson()
+
+  - age
+  - birthday 
+
+- postPerson()
 
