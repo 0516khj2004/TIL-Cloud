@@ -334,3 +334,98 @@ class PersonRepositoryTests {
   - GlobalExceptionHandler 
 
     - clss를 만들어서 어떤 controller에서도 사용할 수 있도록 함
+
+### 8. Parameter Validator
+
+- ```
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  ```
+
+### 9. List Api & Paging
+
+- paging
+
+  - ```
+    public List<Person> getAll(Pageable pageable) {
+        return personRepository.findAll(pageable);
+    }
+    ```
+
+
+
+
+
+### 정리
+
+- 스프링부트 프로젝트 생성
+- Gradle을 이용한 의존성 관리
+
+#### (1)
+
+- JPA
+  - Entity 생성
+  - @OneToOne Relation
+    - Cascade Type
+    - FetchType
+    - Optional
+  - Query Method
+    - @Embedded
+    - @Valid 
+    - Query
+    - Where(for Soft-Delete)
+  - Data.sql
+- SpringMVC 
+  - @GET
+  - @Post
+  - @Put
+  - @Patch
+  - @Delete
+  - @PathVarialbe
+  - @RequestBody
+- Lombok
+  - @Getter
+  - @Setter
+  - @ToString
+  - @Construntor
+  - @EqualsAndHash
+  - @Data
+- SpringTest
+- Java8
+  - Stream
+  - Filter
+  - Map
+
+#### (2)
+
+- SpringMVC
+
+  - CustomJsonSerializer
+
+- SpringTest
+
+  - MockMvc test
+    - Mockito
+    - CustomArgumentMatcher
+  - Matcher
+
+- Exception Handling
+
+  - CutomException
+  - ExcptionHandler
+  - GlobalExceptionHandler
+
+- Parameter Validator
+
+  - @NotEmpty
+  - @NotBlank
+  - @Valid
+
+- Paging
+
+  - Pageable
+  - Page<T>
+
+  
+
+
+
