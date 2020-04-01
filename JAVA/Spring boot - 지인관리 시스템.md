@@ -227,3 +227,63 @@
 
 - postPerson()
 
+### 6. Repository Test
+
+```
+@Transactional
+@SpringBootTest
+class PersonRepositoryTests {
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Test
+    void findByName(){
+        List<Person> people = personRepository.findByName("koo6");
+        assertThat(people.size()).isEqualTo(1);
+
+        Person person = people.get(0);
+        assertAll(
+                ()->assertThat(person.getName()).isEqualTo("koo6"),
+                ()->assertThat(person.getHobby()).isEqualTo("reading"),
+                ()->assertThat(person.getAddress()).isEqualTo("Seoul"),
+                ()->assertThat(person.getBirthday()).isEqualTo(Birthday.of(LocalDate.of(1991,7,10))),
+                ()->assertThat(person.getJob()).isEqualTo("officer"),
+                ()->assertThat(person.getPhoneNumber()).isEqualTo("010-2222-5555"),
+                ()->assertThat(person.isDeleted()).isEqualTo(false)
+        );
+    }
+
+    @Test
+    void findByNameIfDeleted(){
+        List<Person> people = personRepository.findByName("koo7");
+        assertThat(people.size()).isEqualTo(0);
+    }
+
+    @Test
+    void findByMonthOfBirthday(){
+        List<Person> people = personRepository.findByMonthOfBirthday(5);
+
+        assertThat(people.size()).isEqualTo(2);
+        assertAll(
+                ()->assertThat(people.get(0).getName()).isEqualTo("koo"),
+                ()->assertThat(people.get(1).getName()).isEqualTo("koo2")
+        );
+    }
+
+    @Test
+    void findPeopleDeleted(){
+        List<Person> people = personRepository.findPeopleDeleted();
+
+    assertThat(people.size()).isEqualTo(1);
+        assertThat(people.get(0).getName()).isEqualTo("koo7");
+
+        }
+}
+```
+
+### 7. Service Test 
+
+- Mockito test -> 호출되었다고 가정하는 것
+  - when -> if와 같은 뜻 
+- mock test로 구현했기때문에 spring test보다 더 빠르다 
