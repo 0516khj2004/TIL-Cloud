@@ -286,4 +286,51 @@ class PersonRepositoryTests {
 
 - Mockito test -> 호출되었다고 가정하는 것
   - when -> if와 같은 뜻 
-- mock test로 구현했기때문에 spring test보다 더 빠르다 
+- mock test로 구현했기때문에 spring test보다 더 빠르다
+
+### 8. Exception Handling
+
+- RuntimeException
+
+- peronException  - service
+
+  - ```
+    @Slf4j
+    public class PersonNotFoundException extends RuntimeException {
+        private static final String MESSAGE = "Person Entity가 존재하지 않습니다";
+    
+        public PersonNotFoundException() {
+            super(MESSAGE);
+            log.error(MESSAGE);
+        }
+    }
+    ```
+
+- controller test
+
+  - BAD_REQUEST - 400에러
+
+  - INTERNAL_SERVER_ERROR - 500 에러
+
+  - ```
+    @ExceptionHandler(value = RenameNotPermittedException.class)
+    public ResponseEntity<ErrorResponse> handleRenameNotPermittedException(RenameNotPermittedException ex){
+    return  new ResponseEntity<>(ErrorResponse.of(HttpStatus.BAD_REQUEST,
+    ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(value = PersonNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handlePersonNotFoundException(PersonNotFoundException ex){
+    return  new ResponseEntity<>(ErrorResponse.of(HttpStatus.BAD_REQUEST,
+    ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(value = RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex){
+    log.error("서버오류: {}", ex.getMessage(), ex);
+    return  new ResponseEntity<>(ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR,
+    "알 수 없는 서버 error 발생"),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    ```
+
+  - GlobalExceptionHandler 
+
+    - clss를 만들어서 어떤 controller에서도 사용할 수 있도록 함
