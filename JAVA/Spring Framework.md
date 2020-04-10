@@ -5,6 +5,10 @@
 > 하부 구조를 구현하는 들어가는 노력을 절감하게 해줌 
 >
 > Java 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애플리케이션 프레임워크이다
+>
+> 라이브러리 -> 개발자가 제어권을 가짐
+>
+> 프레임워크 -> 프레임워크가 제어권을 가짐 / 개발자가 작성한 클래스를 프레임워크 컨테이너가 객체를 생성하고 setter method를 호출한다.
 
 - spring 기술
 
@@ -26,10 +30,10 @@
 
       생명주기 관리를 개발자가 아닌 컨테이너가 대신 해준다
 
-      - DL
-      - DI(의존성 주입)
-        - setter injection
-        - constructor injection
+      - DL(DEpendency Lookup - 의존성을 찾음)
+      - DI(dependency injection - 의존성 주입)
+        - **setter** injection - 기본생성자 호출
+        - **constructor** injection  - 오버로딩 생성자 호출 
         - method injection
 
     - spring Dl
@@ -139,6 +143,20 @@
 
       junit Test 구문과 같은 역활을 한다.
 
-    - 
+  - @Autowired
 
-  - @
+    - getBean과 동일한 역활
+    - <property ref=""  />
+  
+  - @Component
+  
+    - <bean>
+  
+  - @Value 
+  
+    - <property ref="" />
+  
+  - @Qualifier("stringPrinter")
+  
+    - 타입이 2개 이상일 때는 지정해야한다
+
