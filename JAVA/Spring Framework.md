@@ -4,11 +4,15 @@
 >
 > 하부 구조를 구현하는 들어가는 노력을 절감하게 해줌 
 >
+> 업무 개발자는 기능적인 요구사항(biz logic) 개발에 전념할 수 있게 해준다.
+>
 > Java 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애플리케이션 프레임워크이다
 >
 > 라이브러리 -> 개발자가 제어권을 가짐
 >
 > 프레임워크 -> 프레임워크가 제어권을 가짐 / 개발자가 작성한 클래스를 프레임워크 컨테이너가 객체를 생성하고 setter method를 호출한다.
+>
+> jar(java archive)
 
 - spring 기술
 
@@ -32,8 +36,8 @@
 
       - DL(DEpendency Lookup - 의존성을 찾음)
       - DI(dependency injection - 의존성 주입)
-        - **setter** injection - 기본생성자 호출
-        - **constructor** injection  - 오버로딩 생성자 호출 
+        - **setter** injection - 기본생성자로 객체를 생성하고 setter method의 인자로 의존하는 객체를 1개씩 주입해 주는 방식
+        - **constructor** injection  - (중복정의된)오버로딩 생성자로 객체를 생성하고 이 생성자의 인자로 의존하는 객체를  여러개씩 주입해 주는 방식 
         - method injection
 
     - spring Dl
@@ -70,6 +74,8 @@
   - Ajax
 
     - 비동기적인 자바스크립를 통해서 제공하는 프레임워크 
+    
+  - 디자인 패턴(Design Pattern-GoF(gang of four) pattern) 
 
 - 역활
 
@@ -90,7 +96,7 @@
 
   > npm (node package manager)
 
-  - Maven
+  - Maven   -> 라이브러리 설치해주는 것 
     - <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
       <dependency>
           <groupId>org.springframework</groupId>
@@ -105,8 +111,13 @@
   - configure에서 maven project로 변경 -> pom.xml
   - pom.xml -> dependency  추가 ->https://mvnrepository.com/artifact/org.springframework/spring-context/4.3.26.RELEASE 카피해오기
   - src-> config폴더 만들어서 -> spring_bean.xml 만들기 (bean, context 추가)
+  
+- Open Source 
 
-
+  - Spring(Context, Test)
+  - Maven(Pon.xml)
+  - junit
+  - Tomcat(web container)
 
 # jUnit
 
@@ -160,3 +171,85 @@
   
     - 타입이 2개 이상일 때는 지정해야한다
 
+# DI 구현하는 전략 3가지
+
+> 용어 정리
+>
+> - bean -  스프링이 IoC방식으로 관리하는 객체
+> - beanFactory, ApplicationContext - bean 생성 , Spring Bean Container 
+> - Configuration MetaData
+
+- 전략 1  - .xml로 구현하는 방식 
+
+  - configuration(설정)을 xml에 한다
+  - 장 : 전체 의존관계 구조를 파악하기 쉽다.
+  - 단 : xml 파일 공유의 문제점  - 
+  - setter injection
+    - <bean id="bean의 고유한 이름 " class="package.class이름"  / > 
+    - <!-- setValue(Integer val) -->
+    - <property name="value" value="100" />
+    - <!-- setMyPrinter(Printer p) -->
+    - <property name="myPrinter" ref="strPrinter" /> 
+  - contructor injection
+    - <!-- public Hello(Interger val, String name, Printer pr) -->
+    - <bean id ="helloC" class="xxx.hello">
+      - <contructor-arg name="val" value="100"/>
+      - <contructor-arg name="name" value="스프링" />
+      - <constructor-arg name="pr" ref="strPrinter"/> 
+    - </bean>
+
+- 전략 2 
+
+  - annotation과 XML를 혼용해서 사용 
+
+  - 장:  개발모드시 편리하다, xml파일 설정이 좀 더 간단해져서 관리가 용이
+
+  - 단: 의존관계를 파악하기가 전력1보다 쉽지 않다,
+
+  -  Annotation
+
+    - <-- <bean> 태그와 동일, bean으로 등록함-->
+    - @Component
+    - @Controller
+    - @Service 
+    - @Repository
+    - <-- 의존관계가 있는 bean을 찾으러 자동으로 주입시켜 주는 기능-->
+    - @Autowired(@Qualifier)  - Type으로 찾음
+    - @Value
+    - @Qualifier - 타입이 2개 이상일 때는 지정해야한다
+    - @Resource - bean의 name(or id)으로 찾음
+
+  - .xml
+
+    - <context:component-scan base-package="myspring.di.annot" />
+
+      :basepackage에서 지정한 팩키지의 아래의 모든 클래스에 선언된 @Component 등  찾아주는(Auto scanning) 기능 
+
+- 전략 3  - java config, No xml
+
+  - Annotation
+    - @Configuration - java Config 클래스 
+    - @Bean - <bean>태그와 같은 역활 
+    - @ComponentScan - < context:component-scan > 태그와 같은 역활 
+
+
+
+# Oracle SQL
+
+- JDBC 
+
+  - 인터페이스와 구현을 분리 
+
+    - 특정 db에 종속되지 않고 벤더 중심적으로 어플리케이션을 구현하기 위해서
+
+  - coding 절차
+
+    1. Driver 등록 - class.forName("oracle.jdbc.driver.OracleDriver");
+    2. DBMS와 연결 - DriverManager.getConnection(url, user, pass);
+
+    ​					        	- connection 객체가 만들어진다.
+
+    3. statement 생성  - Statement stmt = conn.createStatement();
+    4. SQL전송 - (select ) ResultSet set = stmt.executeQuert(query)
+    5. 결과 받기 - (DML) - stmt.executeUpdate(query) 
+    6. 닫기  - close()
