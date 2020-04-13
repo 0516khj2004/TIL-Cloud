@@ -245,11 +245,52 @@
   - coding 절차
 
     1. Driver 등록 - class.forName("oracle.jdbc.driver.OracleDriver");
-    2. DBMS와 연결 - DriverManager.getConnection(url, user, pass);
+    2. DBMS와 연결 (DB와 연결을 담당하는 Connection 객체 생성)
+       - DriverManager.getConnection(url, user, pass);
+          - connection 객체가 만들어진다.
+          - String url = "jdbc:oracle:this:@localhost:1521:xe"
+          - String user = "scott"
+          - Stirng pass = "tiger"
 
-    ​					        	- connection 객체가 만들어진다.
+    3. statement 생성 - sql 전송해주는 역활을 담당하는 statement 객체 생성  
 
-    3. statement 생성  - Statement stmt = conn.createStatement();
-    4. SQL전송 - (select ) ResultSet set = stmt.executeQuert(query)
-    5. 결과 받기 - (DML) - stmt.executeUpdate(query) 
-    6. 닫기  - close()
+       - Statement stmt = conn.createStatement();
+
+    4. SQL전송 - executeQuery( ), executeUpdte( ) 메서드 사용
+
+       - (select ) ResultSet set = stmt.executeQuery(query)
+
+         ​				while(re.next()){  String id = rs.getString("userid") ;
+
+         ​												integer value = rs.getInteger(2) ;}
+
+       - (등록 갱신 삭제 ) int cnt = stmt.executeUpdate(query) 
+
+    5. 결과 (사용했던 자원들 받기 ) 닫기  - close()
+
+       - ResultSet, Statement , Connection의 close();
+
+  - javase 포함된 jdbc api는 인터페이스가 대부분을 차지한다
+
+  - java.sql, javax,sql 패키지
+
+  - 인터페이스 구현은 DB vendor 가 한다
+
+  - DB vendor 가 제공하는 JDBC Driver jar(zip) 을 사용한다.
+
+  - Vo(value object) - 변수를 생성하고 get, set를 가진 class -
+
+    - or Java Beans , DTO(Data Transfer Object), Entity 
+
+- ORM (Object Relaction Mapping)
+
+  - MyBatis, JPA
+
+  - 매핑  Rule 
+
+    - | java      | db          |
+      | --------- | ----------- |
+      | Class(VO) | table       |
+      | Object    | Row(Record) |
+      | Variable  | Column      |
+
