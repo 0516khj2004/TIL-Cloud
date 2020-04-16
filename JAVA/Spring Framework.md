@@ -294,3 +294,56 @@
       | Object    | Row(Record) |
       | Variable  | Column      |
 
+# MyBatis 
+
+- 자바 오브젝트와 SQL문 사이의 자동 Mapping 기능을 지원하는 ORM프레임워크
+
+- 개발자가 익숙한 SQL을 그대로 이용하면서 JDBC코드 작성의 불편함도 제거해두고, 도메인 객체나 VO객체를 중심으로 개발이 가능하다.
+
+- MyBatis와 MyBatic-Spring을 사용한 DB액세스 Architecture
+
+  - 1. Application Modules
+       1. Service 
+       2. Repository(Mapper)
+    2. OR Mapper
+       1. MyBatis3
+       2. MyBatis-Spring
+    3. JDBC interfaces
+       1. JDBC 
+       2. DataSource -> DBCP (Database Connection Pooling)
+    4. JDBC Implementations
+       1. JDBC Driver
+    5. Persistence Layer
+       1. Database 
+
+- DataSource 인터페이스를 구현한 BasicDataSource 클래스를 Bean으로  등록 
+
+  - ```
+    <bean id="dataSource(인터페이스이름)" class="org.apache.commons.dbcp2.BasicDataSource">
+    	<property name="driverClassName"value="oracle.jdbc.OracleDriver"/>
+    </bean>
+    ```
+
+
+
+
+
+
+
+- Controller  :  화면과 Service를 연결해주는 객체
+- Service : Business Logic(업무로직 예를 들면 , 대출이자 계산, 신용등급 계산)을 포함하는 객체 
+- DAO : Data Access Logic을 포함하는 객체
+- VO : Value Object 값을 저장하는 객체 
+- myspring.user.dao, mapper , service , vo, controller
+  - @Repository, @Service 어노테이션이 사용된 클래스들을 추가
+  - <contextLcomponent-scan base-pacakages="myspring"> -> 모든 페키지 추가 
+- foreign key - 데이터의 정합성
+- Mapper 인터페이스 
+  - 사용하지 않을 경우
+    - SQL을 호출하는 프로그램은 SqlSession의 메서드의 아규먼트에 문자열로 네임스페이스+”.”+SQL ID 로 지정해야 함 
+    - 문자열로 지정하기 때문에 오타에 의해 버그가 숨어있거나, IDE에서 제공하는 code assist 를 사용할 수 없음
+  - 사용하는 경우
+    - type Safe하게 Query를 호출하는 것 
+    - 패키지 이름+”.”+인터페이스 이름+”.”+메서드 이름이 네임스페이스+”.”+SQL ID가 되도록 네임스페이스와 SQL의 ID를 설정해야 함 
+    - Mapper.xml과 동기화되어 다 맞춰줘야 한다,
+    - 
