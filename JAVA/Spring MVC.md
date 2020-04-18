@@ -53,3 +53,12 @@
   - view -> jsp(jstl 라이브러리 ), html
   - controller -> Servlet, 
   - model -> java(dao, service, vo)
+- web.xml 2가지 설정 
+  - Spring Beans Configuration XML 정보를 Tomcat에 알려줘야 함
+  - FrontConroller 역활을 수행하는 Disp
+- Spring MVC기반 웹 어플리케이션 작성 절차
+  1. 클라이언트의 요청을 받는 DispatcherServlet를 web.xml에 설정
+  2. 클라이언트의 요청을 처리할 Controller를 작성
+  3. Spring Bean으로 Controller를 등록
+  4. JSP를 이용한 View 영역의 코드를 작성
+  5. Browser 상에서 JSP를 실행

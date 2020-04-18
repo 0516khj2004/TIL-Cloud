@@ -21,6 +21,7 @@
 	<h2>사용자 관리 메인 </h2>
 	<ol>
 		<li><a href="user.do?cmd=userList">리스트</a></li>
+		<li><a href="user.do?cmd=userForm">사용자 등록</a></li>
 	</ol>
 </body>
 </html>

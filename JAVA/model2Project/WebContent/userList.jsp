@@ -1,3 +1,4 @@
+<%--contentType에서 설정한 charset은 응답(response)데이터의 인코딩 pageEncoding은 jsp 코드에 대한 인코딩  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--@page import="java.util.List"--%>
