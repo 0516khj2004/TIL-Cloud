@@ -56,8 +56,11 @@
 	<context:property-placeholder location="classpath:config/values.properties" />
 	
 	<!-- component Auto Scanning -->
-	<context:component-scan base-package="myspring" />
-	
+	<context:component-scan base-package="myspring.user">
+		<!-- @controller 어노테이션을 선언한 컴포넌트 제외하겠다 -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
 	<!--  StringPrinter 클래스를 bean으로 설정 -->
 	<bean id="sPrinter" class="myspring.di.xml.StringPrinter" />
 	<!-- ConsolePrinter 클래스를 bean으로 설정 -->
