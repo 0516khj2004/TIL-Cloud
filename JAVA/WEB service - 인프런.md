@@ -61,4 +61,41 @@
 - XML format으로 반환하기
 - Filtering
 - Version 관리 
+  - URI versioning
+  - Request Parameter Versioning
+  - Media type versioning
+  - headers versioning
+
+### Section4. -Spring Boot ApI 사용 
+
+- REST API Level3을 위한 `HATEOAS` 설정 
+
+  - 현재 리소스와 연관된(호출 가능한 ) 자원 상태 정보를 제공 
+
+- REST API Documentation을 위한 `Swagger` 설정 
+
+  - 도움말 api 
+  - Swagger-ui
+
+- REST API Monitoring을 위한 `Actuator` 설정
+
+  - 현재 서버의 상태를 알 수 있다 .
+
+  - .yml에 추가하면 더 많은 정보를 모니터링 할 수 있다.
+
+    - ```
+      management:
+        endpoint:
+        endpoints:
+          web:
+            exposure:
+              include: "*"
+      ```
+
+  - HAL Browser 
+
+- Spring Security
+
+  - xml
+    - spring-boot-starter-security 인증처리가능함 
 
