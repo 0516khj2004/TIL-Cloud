@@ -94,7 +94,7 @@ public class UserController {
 	      cityList.add("경기");
 	      cityList.add("부산");
 	      cityList.add("대구");
-	      cityList.add("제주");
+	      cityList.add("인천");
 	      //session객체에 cityList 객체를 저장
 	      session.setAttribute("cityList", cityList);
 	      session.setAttribute("user", user);

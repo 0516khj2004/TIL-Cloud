@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import myspring.user.service.UserService;
 import myspring.user.vo.UserVO;
+import myspring.user.vo.UserVOXML;
 
 @RestController
 //controller + responseBody
@@ -22,6 +23,7 @@ public class RestUserController {
 	@Autowired
 	UserService userService;
 	
+	//json형태
 	//사용자 목록 
 	@GetMapping("/users")
 	public List<UserVO> userList(){
@@ -55,6 +57,7 @@ public class RestUserController {
 			return Boolean.FALSE;
 		}
 	}
+	//사용자 삭제
 	@DeleteMapping("/users/{id}")
 	public Boolean userDBoolean(@PathVariable String id) {
 		if(id != null) {
@@ -63,5 +66,13 @@ public class RestUserController {
 		}else {
 			return Boolean.FALSE;
 		}
+	}
+	
+	//xml형태
+	//사용자 목록
+	@GetMapping("/usersxml")
+	public UserVOXML userListXml() {
+		List<UserVO> userList = userService.getUserList();
+		return new UserVOXML("success", userList);	
 	}
 }
