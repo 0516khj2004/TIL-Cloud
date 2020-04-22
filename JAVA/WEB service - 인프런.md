@@ -99,3 +99,62 @@
   - xml
     - spring-boot-starter-security 인증처리가능함 
 
+### 5. Section
+
+- JPA개요 
+
+  - jpa(java persistence API)
+    - 자바 ORM기술에 대한 API 표준 명세 
+    - 자바 어플리케이션에서 관계형 데이터베이스를 사용하는 방식을 정의한 인터페이스 
+    - EntityManager를 통해 CRUD 처리
+  - Hibernate 
+    - JPA의 구현체, 인터페이스를 직접 구현한 라이브러리 
+    - 생산성, 유지보구 ,비종속성
+  - Spring Data JPA
+    - springModule
+    - Jpa를 추상화한 Repository 인터페이스 제공 
+
+- Entity
+
+  - @Entity 사용하면 h2 db에 테이블이 생성된다 .
+  - id 값에 @id , @GeneratedValue을 넣어준다 
+  - resoures 폴더에 .sql문 파일을 제공하면 값이 들어간다.
+  - Repository 
+  - Controller 
+    - findAll - 전체 조회
+    - findById  - 개별 조회 
+      - Optional<User> user = userRepository.findById(id);
+    - deleteById - 개별 삭제 
+    - save - 등록 
+
+- H2 console사용을 위한 SecurityConfig 파일 수정
+
+- JPA Service를 위한 GET/POST/DELETE메소드 추가
+
+- Post Entity 추가와 User Entity와의 관계 설정  
+
+  - user : post -> 1:N  -> main: sub
+
+  - user 도메인 
+
+    - @OneToMany(mappedBy = "user")
+
+      private List<Post> posts;
+
+  - post 도메인 
+
+    - @ManyToOne(fetch = Fetch.Lazy) -> jpa 지연 로딩 
+    - private User user;
+
+### 6. Section - Restful APl 설계 가이드
+
+- Richardson Maturity Model(성숙도 모델)
+  - Level 0
+  - Level 1 
+    - Resources
+  - Level 2
+    - HTTP Methods
+  - Level 3 
+    - Level2 + HATEOAS 
+    - Hypermedia controls
+- Best Practices
