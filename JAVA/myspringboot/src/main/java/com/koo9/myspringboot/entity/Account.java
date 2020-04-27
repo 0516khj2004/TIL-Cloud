@@ -7,16 +7,29 @@ import javax.persistence.Id;
 
 @Entity
 public class Account {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@Column(unique = true) // 증복된 값이 있으면 안된다 
+
+	@Column(unique = true) // 증복된 값이 있으면 안된다
 	private String username;
-	
+
 	@Column
 	private String password;
+
+	@Column
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 
 	public Long getId() {
 		return id;
@@ -83,5 +96,5 @@ public class Account {
 	public String toString() {
 		return "Account [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
-	
+
 }
