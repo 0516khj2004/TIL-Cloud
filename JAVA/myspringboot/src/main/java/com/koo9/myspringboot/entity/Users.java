@@ -11,16 +11,17 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @JacksonXmlRootElement
 public class Users implements Serializable {
 
-	private static final long serialVersionUID = 22L;
+private static final long serialVersionUID = 1L;
+	
 	@JacksonXmlProperty(localName = "User")
 	@JacksonXmlElementWrapper(useWrapping = false)
 	private List<User> users = new ArrayList<>();
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
+	
 	public List<User> getUsers() {
 		return users;
+	}
+	
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 }
