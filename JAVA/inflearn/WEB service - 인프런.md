@@ -40,8 +40,10 @@
 - Path Variable 
 
   - 값을 전달하여 endpoint에 저장할 수 있다 .
+  
+- @Bean 
 
-
+  - 메소드 어노테이션 
 
 ### Section 2.  - User Service API추가  - 비지니스로직
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springbootmybatis.repository.UserMapper">
+    <select id="selectAllUsers"
+            resultType="com.example.springbootmybatis.entity.Users">
+        select id, name , email, createAt from users
+        order by createAt desc
+    </select>
+    <select id="selectUserById"
+            resultType="com.example.springbootmybatis.entity.Users"
+            parameterType="string">
+         select id, name , email, createAt from users
+         where id=#{id}
+    </select>
+    <insert id="insertUser"
+            parameterType="com.example.springbootmybatis.entity.Users">
+        insert into users(id,name,email) values (#{id}, #{name}, #{email})
+    </insert>
+    <update id="updateUser"
+            parameterType="com.example.springbootmybatis.entity.Users">
+        update  users set name=#{name}, email=#{email}, where  id=#{id}
+    </update>
+    <delete id="deleteUser"
+            parameterType="string">
+        delete  from users where  id=#{id}
+    </delete>
+</mapper>
