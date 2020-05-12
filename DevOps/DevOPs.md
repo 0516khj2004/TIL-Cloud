@@ -54,6 +54,10 @@
     - 인증, 권한 처리 ,암호화 ,서비스 검색, 요청 라우팅, 로드 밴런싱,서비스 디스커버리  
     - 자가 치유 복구 서비스
   - 서비스간의 통신과 관련된 기능을 자동화 
+  - 디스커버리 서버  
+  - configuration 서버 
+  - L'B 서버 
+  - Router 서버 
 - runtime platform
 - backing service 
 - telemetry
@@ -70,6 +74,70 @@
 
 
 
-- CI의 목적?
-  - 
+# 예제 .1
+
+- circuit Breaker
+  - 전기회로의 차단기와 같은 역활 -> 문제를 감지하면 모든 시스템과의 연결 차단
+  - 장애가 발생하는 서비스에 반복적인 호출이 되지 못하게 차단 
+  - on(서비스를 차단)-open / off(정상상태)-closed  
+
+
+
+- 마이크로서비스 아키텍처
+
+  - git repository-> config server <-마이크로서비스 (1) - configuration 서버 
+
+    ​		 유레카 server <- 마이크로서비스 (2) -디스커버리 서버 
+
+  - web client -> Zuul 서버 <-마이크로 서비스 (3)
+
+  - service monitoring -> 히스트릭스 대시보드 
+
+    터빈서버 -> 히스트릭스 대시보드 (5)
+
+    터빈서버 -> 마이크로 서비스 (4)
+    
+    
+
+
+- .yml 
+  spring:
+  		profiles: local
+
+  msaconfig:
+  		greeting: "Welcome to local server!!!"
+  		topic-name: "coffee-topic-local"
+  		ipaddress: "192.168.10.102"
+  		dbtype: "mysql"                                                          //application-local.yml
+
+  
+
+- 업데이트 
+
+
+  - 1.5버전 
+
+    - http://localhost:8081/refresh
+    - post방식 
+
+  
+
+# 예제 .2
+
+- 8010 eurelca server
+- @EnableEurekaServer
+  
+- 8011 Zuul server
+
+  - @EnableZuulProxy
+- @EnableEurekaClient
+  
+- 8012 config server 
+- @EnableConfigServer
+
+
+
+- cmd 창에서 프로젝트 실행
+  - mvn spring-boot:run 
+  - mvn spring-boot:run  -Dspring-boot.run.arguments="--spring.application.instance_id=koo9 --server.port=9001"
 
