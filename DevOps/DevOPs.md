@@ -130,14 +130,29 @@
 - 8011 Zuul server
 
   - @EnableZuulProxy
-- @EnableEurekaClient
+  - @EnableEurekaClient
   
 - 8012 config server 
-- @EnableConfigServer
+  - @EnableConfigServer
 
 
+
+- localhost:8011/user-ws/         == localhost:apiuser의포트번호 
+
+  - Zuul 서버랑 연결되어있음
+
+  
 
 - cmd 창에서 프로젝트 실행
   - mvn spring-boot:run 
   - mvn spring-boot:run  -Dspring-boot.run.arguments="--spring.application.instance_id=koo9 --server.port=9001"
+
+
+
+- AuthenticationFilter URL 변경
+  - localhost:8011/user-ws/user/login 
+- docker 
+  - rabbitmq
+  - `docker run -d --name rabbitmq -p 5672:5672 -p 9090:15672 --restart=unless-stopped -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:management -> ` 생성
+  - discovery server -> zuul server -> configuration server ->user-ws server 
 
