@@ -150,9 +150,40 @@
 
 
 - AuthenticationFilter URL 변경
-  - localhost:8011/user-ws/user/login 
-- docker 
-  - rabbitmq
-  - `docker run -d --name rabbitmq -p 5672:5672 -p 9090:15672 --restart=unless-stopped -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:management -> ` 생성
-  - discovery server -> zuul server -> configuration server ->user-ws server 
 
+  - localhost:8011/user-ws/user/login 
+
+- docker 
+
+  - rabbitmq
+
+  - `docker run -d --name rabbitmq -p 5672:5672 -p 9090:15672 --restart=unless-stopped -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:management -> ` 생성
+
+  - discovery server -> zuul server -> configuration server ->user-ws server (실행 순서)
+
+- 보안 작업 
+
+  - keytool
+
+  - 대칭 암호  
+
+    - config -> bootstrap.yml
+
+      - encrypt:
+
+        ​		key:                -> /encrypt              <--> decrypt
+
+  - 비대칭 암호 
+
+    keytool -genkeypair -alias apiEncryptionkey -keyalg RSA -keypass "1q2w3e4r" -keystore apiEncryptionkey.jks -storepass "1q2w3e4r"
+
+    - congfig -> bootstrap.yml
+
+      - encrypt:
+
+         	key-store:	
+
+        ​	  location: file:///${user.home}/msa/msa/LAB/dev/apiEncryptionkey.jks
+    	password: 1q2w3e4r
+          	alias: apiEncryptionkey
+      
