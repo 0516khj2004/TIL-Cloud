@@ -140,9 +140,21 @@
 
     - http://localhost:8081/refresh
     - post방식 
+    
 - zookeeper 설치 -kafka 시스템 
 
+- Rest call
+
+  1. Rest Template 
+  2. Feign 
+
+  member.
   
+- 직렬화 
+
+
+  - 
+  - 마크업인터페이스 
 
 # 예제 .2
 
@@ -209,3 +221,7 @@
     	password: 1q2w3e4r
           	alias: apiEncryptionkey
       
+  
+- 실행 순서
+
+  - 유레카 (8010)-> config(8012)-> zuul(8011) ->마이크로서비스 api 
