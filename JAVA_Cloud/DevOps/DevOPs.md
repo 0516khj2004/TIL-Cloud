@@ -69,7 +69,7 @@
   - Test -> 단위 테스트 , 소스 정적분석 
   - Artifact Storage-> 도커이미지 저장 
   - Deploy
-  - Monitor 
+  - Monitor w
   - 프로그램 -> ex) Jenking
 
 
@@ -225,3 +225,11 @@
 - 실행 순서
 
   - 유레카 (8010)-> config(8012)-> zuul(8011) ->마이크로서비스 api 
+  
+- Slf4j
+
+  - debug -> info-> warn -> error-> fatal (서브 망가짐)
+
+- http://localhost:8012/actuator/bus-refresh [post] -> 모든 ms에 반영 
+
+- ​              
