@@ -232,4 +232,173 @@
 
 - http://localhost:8012/actuator/bus-refresh [post] -> 모든 ms에 반영 
 
-- ​              
+
+
+
+
+
+# Zipkin server 
+
+- pom.xml
+  
+- spring-cloud-sleuth-zipkin
+  
+- ```
+  <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-config</artifactId>
+  </dependency> --> config와 연결
+  ```
+
+
+
+# docker 
+
+- Local computer 
+
+  - user ms
+  - album ms
+  - api gateway - 8011
+  - config server - 8012 
+  - Eureka - 8010 
+  - RebbiMQ
+
+- AWS EC2 LInux instance에 옮기기  - 순서 
+
+  - 1)  RabbiMQ -메세지 큐
+
+  - 2) config Server    <-> git repo             // EC2 한대에 두개 올리기 
+
+    -----
+
+  - 3) Eureka server 
+
+    ----------
+
+  - 4) API Gateway
+
+    -----------
+
+  - 5) Albums ms 
+
+    -----
+
+  - 6) mysql AWA RDS
+
+    -----
+
+  - 7) user ms 
+
+  - 서로 통신은 private IP로 통신한다 
+
+  - client는 gateway(zuul)로 통해서 통신한다 
+
+- EC2 instance 
+
+  - sudo yum update 
+
+- Create config server docker image 
+
+  - config -> dockerfile  - config 
+
+    - ```
+      FROM openjdk:8-jdk-alpine
+      VOLUME /tmp
+      COPY apiEncryptionkey.jks apiEncryptionkey.jks
+      COPY UnlimitedJCEPolicyJDK8/* /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/
+      COPY target/myapp-config-service-0.0.1-SNAPSHOT.jar ConfigServer.jar
+      ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","ConfigServer.jar"]
+      ```
+
+  - eureka
+
+    ```
+    FROM openjdk:8-jdk-alpine
+    COPY target/myapp-discovery-service-0.1.jar DiscoveryService.jar
+    ENTRYPOINT ["java", "-jar", "DiscoveryService.jar"]
+    ```
+
+    - mvn crean 
+    - mvn package
+    - docker build --tag=0516khj2004/config-server --force-rm=true .
+    - docker push 0516khj2004/config-server
+
+  - album
+
+    ```
+    FROM openjdk:8-jdk-alpine
+    VOLUME /tmp
+    COPY target/myapp-discovery-service-0.1.jar DiscoveryService.jar
+    ENTRYPOINT ["java", "-jar", "DiscoveryService.jar"]
+    ```
+
+    
+
+- 컨테이너 올리기
+
+  - docker inspect config-server 
+
+  - config 
+
+    - docker run -d -p 8012:8012 --name config-server 0516khj2004/config-server
+    - docker run -d -p 8012:8012 | -e "spring.rabbitmq.host=172.17.0.2" | -e "spring.profiles.active=default" | 0516khj2004/config-server
+
+  - eureka 
+
+    - docker run -d -p 8010:8010 --name eureka-server -e "spring.cloud.config.uri=http://172.17.0.3:8012" 0516khj2004/eureka-server
+
+  - zuul
+
+    - docker run -d -p 8011:8011 --name zuul-gateway 
+
+      -e "spring.rabbitmq.host=172.17.0.2"
+
+      -e "eureka.client.serviceUrl.defaultZone=http://test:test@172.17.0.4:8010/eureka/"
+
+      -e "spring.cloud.config.uri=http://172.17.0.3:8012"
+
+      0516khj2004/zuul-gateway
+
+  - album ms 
+
+    - docker run -d 
+
+      -e "eureka.client.serviceUrl.defaultZone=http://test:test@172.17.0.4:8010/eureka/"
+
+      -v /home/ec2-user/api-logs:/api-logs
+
+      -e "server.port=8989" -p 8989:8989
+
+      0516khj2004/albums-microservice
+
+  - user ms
+
+    - docker run -d 
+
+      -e "server.port=10000" -p 10000:10000
+
+      -e "spring.rabbitmq.host=172.17.0.2" 
+
+      -e "spring.rabbitmq.port=9090" 
+
+      -e "spring.zipkin.base-url=http://172.17.0.7:9411" 
+
+      -e "eureka.client.serviceUrl.defaultZone=http://test:test@172.17.0.4:8010/eureka/" 
+
+      -e "spring.cloud.config.uri=http://172.17.0.3:8012" 
+
+      0516khj2004/user-microservice
+
+      ```
+      docker run --name user -e "server.port=10000" -p 10000:10000 -e "spring.rabbitmq.host=172.17.0.2" -e "spring.zipkin.base-url=http://172.17.0.7:9411" -e "spring.rabbitmq.port=9090"  -e "eureka.client.serviceUrl.defaultZone=http://test:test@172.17.0.4:8010/eureka/" -e "spring.cloud.config.uri=http://172.17.0.3:8012" 0516khj2004/user-microservice
+      ```
+
+      
+
+- EC2 사용하는 경우
+
+  - sudo yum update
+  - sudo yum install docker 
+  - sudo service docker start
+  - sudo usermod -a -G docker ec2-user 
+
