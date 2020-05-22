@@ -341,11 +341,11 @@
   - config 
 
     - docker run -d -p 8012:8012 --name config-server 0516khj2004/config-server
-    - docker run -d -p 8012:8012 | -e "spring.rabbitmq.host=172.17.0.2" | -e "spring.profiles.active=default" | 0516khj2004/config-server
+    - docker run -d -p 8012:8012 -e "spring.rabbitmq.host=172.18.0.2" -e "spring.profiles.active=default" --network my-net 0516khj2004/config-server
 
   - eureka 
 
-    - docker run -d -p 8010:8010 --name eureka-server -e "spring.cloud.config.uri=http://172.17.0.3:8012" 0516khj2004/eureka-server
+    - docker run -d -p 8010:8010 --name eureka-server -e "spring.cloud.config.uri=http://172.17.0.4:8012" --network my-net 0516khj2004/eureka-server
 
   - zuul
 
@@ -361,31 +361,57 @@
 
   - album ms 
 
-    - docker run -d 
+    - docker run -d \
 
-      -e "eureka.client.serviceUrl.defaultZone=http://test:test@172.17.0.4:8010/eureka/"
+      -p 9000:9000 \
 
-      -v /home/ec2-user/api-logs:/api-logs
+      -e "spring.rabbitmq.host=172.18.0.2" \
 
-      -e "server.port=8989" -p 8989:8989
+      -e "spring.cloud.config.uri=http://172.18.0.3:8012" \
+
+      -e "eureka.client.service-url.defaultZone=http://test:test@172.18.0.4:8010/eureka" \
+
+      -e "server.port=9000" \
+
+      --network my-net \
 
       0516khj2004/albums-microservice
 
+  - mysql 
+
+    - docker run -d --name mysql \
+
+      -p 3306:3306 \
+
+      -e "MYSQL_ROOT_PASSWORD=root" \
+
+      -e "MYSQL_DATABASE=springboot" \
+
+      -e "MYSQL_USER=admin" \
+
+      -e "MYSQL_PASSWORD=12345" \
+
+      --network my-net \
+
+      mysql:5.7.29
+
+      docker inspect mysql | grep IPAddress
+
   - user ms
 
-    - docker run -d 
+    - docker run -d  \
 
-      -e "server.port=10000" -p 10000:10000
+      -e "server.port=10000" -p 10000:10000 \
 
-      -e "spring.rabbitmq.host=172.17.0.2" 
+      -e "spring.rabbitmq.host=172.18.0.2" \
 
-      -e "spring.rabbitmq.port=9090" 
+      -e "spring.rabbitmq.port=9090"  \
 
-      -e "spring.zipkin.base-url=http://172.17.0.7:9411" 
+      -e "spring.zipkin.base-url=http://172.17.0.7:9411"  \
 
-      -e "eureka.client.serviceUrl.defaultZone=http://test:test@172.17.0.4:8010/eureka/" 
+      -e "eureka.client.serviceUrl.defaultZone=http://test:test@172.17.0.4:8010/eureka/"  \
 
-      -e "spring.cloud.config.uri=http://172.17.0.3:8012" 
+      -e "spring.cloud.config.uri=http://172.17.0.3:8012" \
 
       0516khj2004/user-microservice
 
@@ -401,4 +427,42 @@
   - sudo yum install docker 
   - sudo service docker start
   - sudo usermod -a -G docker ec2-user 
+
+
+
+
+
+# Jenkins - CI/ID
+
+- git에서 자동 빌드 
+- 자바로 만들어진 cI/CD 
+- 자바설치 
+
+  - sudo yum install java-1.8*
+  - java -version
+  - find /usr/lib/jvm/java-1.8* | head -n 3
+  - vi ~/.bash_profile
+    - JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64
+    - exprotr JAVA_HOME
+    - PATH=$PATH:$JAVA_HOME
+  - source ./.bash_profile
+- cent OS 설치 - vagrant up
+- jenkins-server 
+
+  - vagrant ssh jenkins-server  --> 서버 접속 
+- ip addr 
+  - 자바 설치 
+- 젠키스 설치 
+  
+  - sudo yum -y install wget  
+  - sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  - sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+    - sudo yum install jenkins
+- start jenkins
+    - service jenkins start
+    - sudo chkconfig jenkins on
+- tomcat-server 
+  - 자바설치 
+  - tomcat 설치 
+  - 
 
